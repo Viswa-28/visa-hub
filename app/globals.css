@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ */
+/* Tailwind v4 @theme — tokens ported verbatim from DESIGN.md (source  */
+/* of truth). Do not hardcode new hex values elsewhere; add a token    */
+/* here first and reference it.                                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Brand color roles (semantic, not literal — see CLAUDE.md §4) */
+  --color-primary: #071b3b; /* Deep Trust Navy — authority, nav, headers */
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #00d2ff; /* Electric Cyan — live/active telemetry, focus rings */
+  --color-secondary-foreground: #071b3b;
+  --color-tertiary: #2563eb; /* Royal Atlantic Blue — CTA buttons, hover states */
+  --color-tertiary-foreground: #ffffff;
+  --color-neutral: #64748b; /* Slate — metadata, labels, dividers */
+  --color-neutral-foreground: #ffffff;
+
+  /* Atmospheric surfaces */
+  --color-background: #f8fafc;
+  --color-background-tint: #eff6ff;
+  --color-foreground: #0b1c30;
+  --color-card: #ffffff;
+  --color-card-foreground: #0b1c30;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #0b1c30;
+
+  --color-surface-container-low: #eff4ff;
+  --color-surface-container: #e5eeff;
+  --color-surface-container-high: #dce9ff;
+  --color-surface-container-highest: #d3e4fe;
+  --color-inverse-surface: #213145;
+  --color-inverse-on-surface: #eaf1ff;
+
+  --color-on-surface-variant: #44474e;
+  --color-outline: #75777f;
+  --color-outline-variant: #c5c6cf;
+
+  /* shadcn structural aliases, re-pointed at the palette above */
+  --color-muted: var(--color-surface-container-low);
+  --color-muted-foreground: var(--color-on-surface-variant);
+  --color-accent: var(--color-surface-container);
+  --color-accent-foreground: var(--color-primary);
+  --color-destructive: #ba1a1a;
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--color-outline-variant);
+  --color-input: var(--color-outline-variant);
+  --color-ring: var(--color-secondary);
+
+  /* Typography — Plus Jakarta Sans, named scale only (see CLAUDE.md §4) */
+  --font-sans: var(--font-plus-jakarta-sans);
+
+  --text-display-hero: 56px;
+  --text-display-hero--line-height: 64px;
+  --text-display-hero--letter-spacing: -0.03em;
+  --text-display-hero--font-weight: 800;
+
+  --text-display-hero-mobile: 36px;
+  --text-display-hero-mobile--line-height: 44px;
+  --text-display-hero-mobile--letter-spacing: -0.02em;
+  --text-display-hero-mobile--font-weight: 800;
+
+  --text-headline-lg: 36px;
+  --text-headline-lg--line-height: 44px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 700;
+
+  --text-headline-lg-mobile: 28px;
+  --text-headline-lg-mobile--line-height: 36px;
+  --text-headline-lg-mobile--letter-spacing: -0.015em;
+  --text-headline-lg-mobile--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 700;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--letter-spacing: -0.005em;
+  --text-headline-sm--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-lg: 14px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0.01em;
+  --text-label-lg--font-weight: 600;
+
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 600;
+
+  --text-label-caps: 11px;
+  --text-label-caps--line-height: 16px;
+  --text-label-caps--letter-spacing: 0.08em;
+  --text-label-caps--font-weight: 700;
+
+  /* Roundedness */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Spacing */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-sm: 1rem;
+  --spacing-gutter-lg: 2rem;
+  --spacing-margin: 2rem;
+  --spacing-margin-mobile: 1.25rem;
+  --spacing-margin-desktop: 3rem;
+
+  /* Motion */
+  --animate-float-slow: float 7s ease-in-out infinite;
+  --animate-float-delayed: float 7s ease-in-out 3s infinite;
+  --animate-pulse-glow: pulseGlow 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.05);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Elevation system (CLAUDE.md §4: glassmorphism is structural, only   */
+/* on elevated cards/popovers/modals — never full-bleed backgrounds).  */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .atmosphere-canvas {
+    background: linear-gradient(
+      180deg,
+      var(--color-background) 0%,
+      var(--color-background-tint) 100%
+    );
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px -10px rgba(7, 27, 59, 0.06);
+  }
+
+  .glass-panel-floating {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+      0 20px 40px -15px rgba(7, 27, 59, 0.12),
+      0 0 0 1px rgba(226, 232, 240, 0.8);
+  }
+
+  .glass-panel-modal {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 25px 60px -12px rgba(7, 27, 59, 0.25);
+  }
+
+  .glass-panel-dark {
+    background: rgba(7, 19, 38, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 210, 255, 0.22);
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

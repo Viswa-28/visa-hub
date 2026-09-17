@@ -1,0 +1,9 @@
+node_modules
+.next
+pnpm-lock.yaml
+
+# Reference docs — not project source, must stay as the user provided them.
+claude.md
+DESIGN.md
+code.html
+screen.png
