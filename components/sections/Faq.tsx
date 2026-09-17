@@ -23,15 +23,15 @@ const FAQS: FaqItem[] = [
   },
   {
     id: "non-usa-visas",
-    question: "Do you assist with non-USA visas as well?",
+    question: "Do you assist with visas beyond the USA?",
     answer:
-      "Yes. We offer end-to-end documentation, visa applications, and slot bookings for Canada, United Kingdom, Schengen (all 27 European countries), Australia, and New Zealand.",
+      "Yes. Our Visa Guide covers 40+ destinations — Canada, United Kingdom, Schengen (all 27 European countries), Australia, New Zealand, UAE, Singapore, Japan, and many more — with end-to-end documentation, applications, and slot bookings.",
   },
   {
-    id: "fee-estimate",
-    question: "Are the fees shown on this site final?",
+    id: "guide-accuracy",
+    question: "How accurate is the information in your Visa Guide?",
     answer:
-      "No — fees shown across the site and in the calculator are illustrative placeholders based on typical consular charges. We confirm the exact, current government and concierge fees with you before any payment or filing.",
+      "It's general guidance to help you prepare — documents, eligibility, and process can change. We always recommend confirming current requirements with the official consulate or e-Visa portal, or asking our team to verify for you.",
   },
 ];
 

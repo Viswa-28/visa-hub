@@ -3,6 +3,7 @@ import {
   CalendarCheck,
   Car,
   ClipboardCheck,
+  Eye,
   FileEdit,
   FileSearch,
   Handshake,
@@ -10,7 +11,6 @@ import {
   MapPin,
   ShieldQuestion,
   UserCheck,
-  Wallet,
 } from "lucide-react";
 import { whatsappHref } from "@/lib/constants";
 import type { ProcessStep } from "@/lib/types";
@@ -43,9 +43,9 @@ const COMMITMENTS = [
     description: "Everything prepared right before your eyes.",
   },
   {
-    icon: Wallet,
-    title: "No Hidden Charges",
-    description: "Clear itemized quotation from day one.",
+    icon: Eye,
+    title: "No Surprises",
+    description: "Every step explained and confirmed with you upfront.",
   },
   {
     icon: Handshake,

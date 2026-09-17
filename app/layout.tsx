@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Canada visa agent",
     "Schengen visa Chennai",
     "dummy ticket for visa",
-    "visa fee calculator",
+    "visa guide by country",
   ],
   alternates: { canonical: "/" },
   openGraph: {

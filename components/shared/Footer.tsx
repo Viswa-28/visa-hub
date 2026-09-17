@@ -3,6 +3,7 @@ import {
   CONSULAR_DISCLAIMER,
   FOOTER_DOORSTEP_LINKS,
   FOOTER_GLOBAL_VISA_LINKS,
+  FOOTER_LEGAL_LINKS,
   FOOTER_SERVICE_LINKS,
   INSTAGRAM_HANDLE,
   PHONE_DISPLAY,
@@ -59,6 +60,18 @@ export function Footer() {
 
         <div className="space-y-4 pt-8 text-[11px] text-white/50">
           <p>{CONSULAR_DISCLAIMER}</p>
+          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 sm:justify-start">
+            {FOOTER_LEGAL_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="hover:text-secondary transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
           <div className="flex flex-col items-center justify-between gap-2 pt-4 text-white/60 sm:flex-row">
             <p>
               &copy; {new Date().getFullYear()} {SITE_NAME}. All rights

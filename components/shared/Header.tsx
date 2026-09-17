@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { PHONE_DISPLAY_SHORT, PHONE_TEL_HREF, SITE_TAGLINE } from "@/lib/constants";
 
 export function Header() {
@@ -39,6 +40,15 @@ export function Header() {
           </span>
         </a>
 
+        <nav aria-label="Primary">
+          <Link
+            href="/visa"
+            className="text-label-md sm:text-label-lg text-foreground/80 hover:text-tertiary whitespace-nowrap transition-colors"
+          >
+            Visa Guide
+          </Link>
+        </nav>
+
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={PHONE_TEL_HREF}
@@ -47,13 +57,18 @@ export function Header() {
             <PhoneCall aria-hidden="true" className="size-4" />
             {PHONE_DISPLAY_SHORT}
           </a>
-          <Button className="bg-tertiary text-tertiary-foreground hover:bg-tertiary/90" size="lg">
-            <a href="#doorstep-section" className="flex items-center gap-1.5">
-              <span className="sm:hidden">Book Visit</span>
-              <span className="hidden sm:inline">Book Doorstep Visit</span>
-              <ArrowRight aria-hidden="true" className="size-4" />
-            </a>
-          </Button>
+          <Link
+            href="/#doorstep-section"
+            className={buttonVariants({
+              size: "lg",
+              className:
+                "bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 gap-1.5",
+            })}
+          >
+            <span className="sm:hidden">Book Visit</span>
+            <span className="hidden sm:inline">Book Doorstep Visit</span>
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
         </div>
       </div>
     </header>

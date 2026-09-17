@@ -3,6 +3,7 @@ import { Header } from "@/components/shared/Header";
 import { WhatsAppFab } from "@/components/shared/WhatsAppFab";
 import { CallBanner } from "@/components/sections/CallBanner";
 import { Categories } from "@/components/sections/Categories";
+import { CountriesServed } from "@/components/sections/CountriesServed";
 import { Doorstep } from "@/components/sections/Doorstep";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
@@ -15,10 +16,11 @@ export default function Home() {
       <Header />
       <main id="main-content">
         <Hero />
-        <Services />
-        <Doorstep />
-        <CallBanner />
         <Categories />
+        <Doorstep />
+        <CountriesServed />
+        <CallBanner />
+        <Services />
         <SocialProof />
         <Faq />
       </main>

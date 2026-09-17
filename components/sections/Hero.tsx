@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MessageCircle, PhoneCall, ShieldCheck } from "lucide-react";
+import { HeroSearchBar } from "@/components/sections/HeroSearchBar";
 import {
   APPROVALS_COUNT,
   PHONE_DISPLAY,
@@ -51,19 +52,21 @@ export function Hero() {
 
         <div className="mx-auto mb-10 max-w-4xl text-center">
           <p className="text-label-md text-secondary mb-2 tracking-wide uppercase">
-            One Destination, All Your Travel Needs!
+            Visa Consulting for 40+ Destinations
           </p>
           <h1 className="text-display-hero-mobile md:text-display-hero mb-4 text-white">
-            Hassle-Free Travel &amp; Doorstep{" "}
-            <span className="text-secondary">
-              Visa Services Under One Roof
-            </span>
+            Expert Visa Consulting, With{" "}
+            <span className="text-secondary">Doorstep Filing</span>
           </h1>
           <p className="text-body-md sm:text-body-lg mx-auto max-w-2xl text-white/85">
-            From international flights, dummy tickets, and worldwide hotels to
-            complete doorstep visa application filing with 100% transparent
-            process.
+            Eligibility, documents, and process explained for every major
+            destination — plus flights, dummy tickets, hotels, and insurance
+            to round out your trip.
           </p>
+        </div>
+
+        <div className="mb-6">
+          <HeroSearchBar />
         </div>
 
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">

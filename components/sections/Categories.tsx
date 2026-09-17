@@ -1,60 +1,22 @@
-import { whatsappHref } from "@/lib/constants";
-import type { VisaCategoryCard } from "@/lib/types";
+import Link from "next/link";
+import * as Flags from "country-flag-icons/react/3x2";
+import { ArrowRight } from "lucide-react";
+import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
-const CATEGORIES: VisaCategoryCard[] = [
-  {
-    id: "tourist",
-    region: "United States",
-    title: "Tourist / Visitor B1/B2",
-    feeChip: "$185 Consular*",
-    bullets: [
-      "Full DS-160 form review",
-      "Fast biometrics & slot booking",
-      "1-on-1 mock interview session",
-      "Doorstep document assistance",
-    ],
-    ctaLabel: "Select B1/B2 Plan",
-  },
-  {
-    id: "student",
-    region: "Academic & University",
-    title: "Student Visa (F-1 / M-1)",
-    feeChip: "$185 + SEVIS*",
-    bullets: [
-      "I-20 compliance & SEVIS I-901",
-      "Fall/Spring intake emergency dates",
-      "Sponsor & loan asset proofing",
-      "University interview coaching",
-    ],
-    ctaLabel: "Select Student Plan",
-  },
-  {
-    id: "work",
-    region: "Employment & Tech",
-    title: "Work Visa (H-1B / L-1)",
-    feeChip: "$205 Consular*",
-    bullets: [
-      "I-797 petition validation",
-      "Dropbox / interview waiver check",
-      "H-4 dependent linking",
-      "221(g) prevention audit",
-    ],
-    ctaLabel: "Select Work Plan",
-  },
-  {
-    id: "global-partner",
-    region: "UK • CAN • Schengen • AUS",
-    title: "Global Visa Partner",
-    feeChip: "From $45 Fee*",
-    bullets: [
-      "Canada TRV / Super Visa",
-      "UK Standard Visitor & Business",
-      "27 Schengen countries entry",
-      "Australia / New Zealand e-Visitor",
-    ],
-    ctaLabel: "Explore Global Visas",
-  },
-];
+const FEATURED_SLUGS = [
+  "usa",
+  "uk",
+  "canada",
+  "schengen",
+  "australia",
+  "uae",
+  "singapore",
+  "thailand",
+] as const;
+
+const FEATURED_DESTINATIONS = FEATURED_SLUGS.map(
+  (slug) => COUNTRY_GUIDES.find((country) => country.slug === slug)!,
+);
 
 export function Categories() {
   return (
@@ -62,65 +24,60 @@ export function Categories() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-12 max-w-3xl text-center">
           <span className="border-tertiary/20 bg-tertiary/10 text-label-caps text-tertiary rounded-full border px-3.5 py-1.5 uppercase">
-            Consular Services Portfolio
+            Visa Consulting
           </span>
           <h2 className="text-headline-lg-mobile text-primary md:text-headline-lg mt-3">
-            All Countries Visa Assistance
+            Popular Visa Destinations
           </h2>
           <p className="text-body-md text-on-surface-variant mt-2">
-            USA &bull; Canada &bull; UK &bull; Schengen &bull; Australia &amp;
-            New Zealand
+            Eligibility, documents, and process for {COUNTRY_GUIDES.length}+
+            destinations — start with a popular one below.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIES.map((category) => (
-            <article
-              key={category.id}
-              className="border-outline-variant bg-card hover:ring-secondary/40 flex flex-col justify-between overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2"
-            >
-              <div className="border-outline-variant/60 bg-surface-container-low flex items-center justify-between gap-2 border-b p-5">
-                <div>
-                  <span className="text-label-md text-neutral tracking-wide uppercase">
-                    {category.region}
-                  </span>
+          {FEATURED_DESTINATIONS.map((country) => {
+            const Flag = Flags[country.code as keyof typeof Flags];
+            return (
+              <Link
+                key={country.slug}
+                href={`/visa/${country.slug}`}
+                className="border-outline-variant bg-card hover:ring-secondary/40 flex flex-col overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2"
+              >
+                <div className="border-outline-variant/60 bg-surface-container-low flex items-center gap-3 border-b p-5">
+                  {Flag && (
+                    <Flag
+                      aria-hidden="true"
+                      className="h-6 w-9 shrink-0 rounded-[2px] object-cover shadow-sm"
+                    />
+                  )}
                   <h3 className="text-label-lg text-primary">
-                    {category.title}
+                    {country.name}
                   </h3>
                 </div>
-                <span className="border-tertiary/20 bg-tertiary/10 text-label-md text-tertiary shrink-0 rounded-md border px-2.5 py-1">
-                  {category.feeChip}
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col justify-between space-y-4 p-5">
-                <ul className="text-body-sm text-on-surface-variant space-y-2">
-                  {category.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-center gap-2">
-                      <span className="font-bold text-emerald-600">
-                        &#10003;
-                      </span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={whatsappHref(
-                    `Hi VisaHub, I would like to inquire about ${category.title}`,
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-primary text-label-md text-primary-foreground hover:bg-tertiary block rounded-md px-4 py-2.5 text-center transition-colors"
-                >
-                  {category.ctaLabel}
-                </a>
-              </div>
-            </article>
-          ))}
+                <div className="flex flex-1 flex-col justify-between gap-4 p-5">
+                  <p className="text-body-sm text-on-surface-variant">
+                    {country.tagline}
+                  </p>
+                  <span className="text-tertiary text-label-md flex items-center gap-1">
+                    View visa guide
+                    <ArrowRight aria-hidden="true" className="size-3.5" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
-        <p className="text-neutral mt-6 text-center text-[11px]">
-          *Fees shown are illustrative estimates, not verified government
-          charges &mdash; confirm current consular fees with our team.
-        </p>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/visa"
+            className="bg-primary text-primary-foreground hover:bg-tertiary text-label-lg inline-flex items-center gap-2 rounded-md px-6 py-3 shadow-md transition-colors"
+          >
+            Explore All {COUNTRY_GUIDES.length}+ Destinations
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
