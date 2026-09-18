@@ -27,14 +27,14 @@ export interface CountryGuide {
 export const COUNTRY_GUIDES: CountryGuide[] = [
   {
     slug: "usa",
-    name: "United States",
+    name: "United States of America",
     code: "US",
     region: "North America",
-    tagline: "B1/B2 tourist & business, F-1 student, and H-1B/L-1 work visas.",
+    tagline: "B1/B2 business & tourist, F-1 student, H-1B work, and J-1 exchange visas.",
     visaTypes: [
       {
         id: "b1-b2",
-        name: "B1/B2 Tourist / Business Visa",
+        name: "B1/B2 Business/Tourist Visa",
         eligibility: [
           "Traveling for tourism, visiting family, or short business trips",
           "Sufficient ties to India and intent to return after the trip",
@@ -43,13 +43,12 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
         documents: [
           "DS-160 confirmation page",
           "Valid passport + old passports (if any)",
-          "Visa photo per US specification",
           "MRV fee payment receipt",
           "Bank statements & ITR for last 2-3 years",
           "Employment/business proof",
           "Invitation letter (if visiting family/friends)",
         ],
-        processingTime: "Varies by consulate slot availability; interview + 3-7 business days after approval",
+        processingTime: "15-30 days",
         steps: [
           "Complete the DS-160 online form",
           "Pay the MRV fee and schedule your biometrics + interview",
@@ -74,7 +73,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
           "Financial/sponsor documents covering full program cost",
           "Loan sanction letter (if applicable)",
         ],
-        processingTime: "Interview-slot dependent; decision usually same day or within 2-3 weeks (administrative processing)",
+        processingTime: "30-35 days",
         steps: [
           "Receive I-20 and pay the SEVIS fee",
           "Complete DS-160 and pay the MRV fee",
@@ -83,26 +82,48 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
         ],
       },
       {
-        id: "h1b-l1",
-        name: "H-1B / L-1 Work Visa",
+        id: "h1b",
+        name: "H-1B Work Visa",
         eligibility: [
           "Sponsored by a US employer with an approved petition (I-129/I-797)",
-          "H-1B: specialty-occupation role matching your qualifications",
-          "L-1: intra-company transfer with 1+ year at the overseas office",
+          "Specialty-occupation role matching your qualifications",
         ],
         documents: [
           "Approved I-797 petition notice",
           "DS-160 confirmation page",
           "Educational & employment credentials",
-          "Company offer letter / transfer letter",
+          "Company offer letter",
           "Passport and prior US visa history (if any)",
         ],
-        processingTime: "Petition timeline set by USCIS; consular stage typically 1-2 weeks after slot",
+        processingTime: "30-35 days",
         steps: [
           "Employer files and receives an approved petition",
           "Complete DS-160 and pay the MRV fee",
           "Schedule biometrics and the visa interview",
           "Attend interview with petition and employment evidence",
+        ],
+      },
+      {
+        id: "j1",
+        name: "J-1 Exchange Visitor Visa",
+        eligibility: [
+          "Accepted into a State Department-designated Exchange Visitor Program (research scholar, intern, trainee, au pair, etc.)",
+          "Sponsored by a designated J-1 program sponsor",
+          "Sufficient funds or sponsor coverage for the exchange period",
+        ],
+        documents: [
+          "Form DS-2019 from your program sponsor",
+          "SEVIS I-901 fee receipt",
+          "DS-160 confirmation page",
+          "Program placement/offer letter",
+          "Financial/sponsor documents covering the exchange period",
+        ],
+        processingTime: "30-35 days",
+        steps: [
+          "Get accepted into a J-1 program and receive Form DS-2019",
+          "Pay the SEVIS I-901 fee",
+          "Complete DS-160 and pay the MRV fee",
+          "Schedule and attend the visa interview",
         ],
       },
     ],

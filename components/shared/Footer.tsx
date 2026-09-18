@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Phone } from "lucide-react";
 import {
   CONSULAR_DISCLAIMER,
@@ -19,12 +20,13 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-5">
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-3">
-              <span
-                aria-hidden="true"
-                className="text-primary flex size-10 items-center justify-center rounded-xl bg-white text-sm font-black"
-              >
-                VH
-              </span>
+              <Image
+                src="/logo.jpeg"
+                alt="VisaHub"
+                width={1024}
+                height={1024}
+                className="size-11 shrink-0 rounded-lg object-cover"
+              />
               <span className="text-headline-sm text-white">
                 Visa<span className="text-secondary">Hub</span>
               </span>

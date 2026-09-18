@@ -1,18 +1,20 @@
 import Link from "next/link";
 import * as Flags from "country-flag-icons/react/3x2";
-import { COUNTRIES_SERVED } from "@/lib/constants";
+import { whatsappHref } from "@/lib/constants";
+import { ALL_COUNTRIES } from "@/lib/all-countries";
+import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
-const CODE_TO_GUIDE_SLUG: Record<string, string> = {
-  US: "usa",
-  CA: "canada",
-  GB: "uk",
-  AU: "australia",
-  NZ: "new-zealand",
-};
+const SCHENGEN_CODES = [
+  "AT", "BE", "HR", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS",
+  "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "SK", "SI",
+  "ES", "SE", "CH",
+];
 
-function guideSlugFor(code: string) {
-  return CODE_TO_GUIDE_SLUG[code] ?? "schengen";
+const GUIDE_SLUG_BY_CODE: Record<string, string> = {};
+for (const guide of COUNTRY_GUIDES) {
+  if (guide.code !== "EU") GUIDE_SLUG_BY_CODE[guide.code] = guide.slug;
 }
+for (const code of SCHENGEN_CODES) GUIDE_SLUG_BY_CODE[code] = "schengen";
 
 export function CountriesServed() {
   return (
@@ -23,31 +25,66 @@ export function CountriesServed() {
             Countries We Serve
           </span>
           <h2 className="text-headline-lg-mobile text-primary md:text-headline-lg mt-3">
-            {COUNTRIES_SERVED.length} Destinations, One Trusted Partner
+            {ALL_COUNTRIES.length} Countries, One Trusted Partner
           </h2>
           <p className="text-body-md text-on-surface-variant mt-2">
-            USA, Canada, UK, Australia &amp; New Zealand, plus every Schengen
-            member state — tap any flag for the full visa guide.
+            We can help with a visa application to any of these{" "}
+            {ALL_COUNTRIES.length} countries — tap a flag to get started.
+            Destinations marked <span className="text-tertiary font-semibold">Guide</span>{" "}
+            have a full eligibility &amp; document breakdown ready now.
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {COUNTRIES_SERVED.map((country) => {
-            const Flag = Flags[country.code];
-            return (
-              <Link
-                key={country.name}
-                href={`/visa/${guideSlugFor(country.code)}`}
-                className="border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 flex items-center gap-2.5 rounded-lg border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2"
-              >
-                <Flag
-                  aria-hidden="true"
-                  className="h-4 w-6 shrink-0 rounded-[2px] object-cover"
-                />
-                <span className="text-label-md text-foreground/80 truncate">
+          {ALL_COUNTRIES.map((country) => {
+            const Flag = Flags[country.code as keyof typeof Flags];
+            const guideSlug = GUIDE_SLUG_BY_CODE[country.code];
+            const tileClassName =
+              "border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 flex items-center gap-2.5 rounded-lg border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2";
+
+            const content = (
+              <>
+                {Flag && (
+                  <Flag
+                    aria-hidden="true"
+                    className="h-4 w-6 shrink-0 rounded-[2px] object-cover"
+                  />
+                )}
+                <span className="text-label-md text-foreground/80 min-w-0 flex-1 truncate">
                   {country.name}
                 </span>
-              </Link>
+                {guideSlug && (
+                  <span className="text-tertiary shrink-0 text-[10px] font-semibold uppercase">
+                    Guide
+                  </span>
+                )}
+              </>
+            );
+
+            if (guideSlug) {
+              return (
+                <Link
+                  key={country.code}
+                  href={`/visa/${guideSlug}`}
+                  className={tileClassName}
+                >
+                  {content}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={country.code}
+                href={whatsappHref(
+                  `Hi VisaHub, I would like to inquire about a visa for ${country.name}`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={tileClassName}
+              >
+                {content}
+              </a>
             );
           })}
         </div>

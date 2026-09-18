@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -23,13 +24,15 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 transition-[height] duration-300 sm:px-6 md:h-20 lg:px-8">
-        <a href="#main-content" className="flex min-w-0 items-center gap-3">
-          <span
-            aria-hidden="true"
-            className="bg-primary text-primary-foreground flex size-11 shrink-0 items-center justify-center rounded-xl text-lg font-black"
-          >
-            VH
-          </span>
+        <Link href="/" className="flex min-w-0 items-center gap-3">
+          <Image
+            src="/logo.jpeg"
+            alt=""
+            width={1024}
+            height={1024}
+            priority
+            className="size-12 shrink-0 rounded-lg object-cover sm:size-14"
+          />
           <span className="min-w-0">
             <span className="text-headline-sm text-primary block truncate">
               Visa<span className="text-tertiary">Hub</span>
@@ -38,16 +41,7 @@ export function Header() {
               {SITE_TAGLINE}
             </span>
           </span>
-        </a>
-
-        <nav aria-label="Primary">
-          <Link
-            href="/visa"
-            className="text-label-md sm:text-label-lg text-foreground/80 hover:text-tertiary whitespace-nowrap transition-colors"
-          >
-            Visa Guide
-          </Link>
-        </nav>
+        </Link>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <a

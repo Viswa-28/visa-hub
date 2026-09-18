@@ -69,15 +69,15 @@ const PROCESS_STEPS: (ProcessStep & { icon: typeof FileSearch })[] = [
   },
   {
     step: 3,
-    title: "Your Approval Before Submission",
-    description: "You review and approve each page before any submission.",
-    icon: UserCheck,
-  },
-  {
-    step: 4,
     title: "Appointment Booking",
     description: "Securing the earliest biometric & consular interview dates.",
     icon: Calendar,
+  },
+  {
+    step: 4,
+    title: "Your Approval Before Submission",
+    description: "You review and approve each page before any submission.",
+    icon: UserCheck,
   },
   {
     step: 5,

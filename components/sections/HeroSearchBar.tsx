@@ -56,6 +56,7 @@ export function HeroSearchBar() {
           onBlur={() => setTimeout(() => setIsFocused(false), 150)}
           placeholder="Search your visa by country — e.g. USA, Canada, UK…"
           autoComplete="off"
+          suppressHydrationWarning
           className="text-body-sm text-foreground placeholder:text-neutral min-w-0 flex-1 bg-transparent outline-none"
         />
         <button
