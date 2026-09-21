@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Anton, Plus_Jakarta_Sans } from "next/font/google";
 import {
   PHONE_DISPLAY,
   SERVICE_REGIONS,
@@ -13,6 +13,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+// Closest free Google Fonts equivalent to the tall, ultra-heavy condensed
+// "Headliner" display face requested — that specific font is a commercial
+// product not distributed on Google Fonts, so it can't be self-hosted via
+// next/font/google. Anton matches the same poster-headline character.
+const anton = Anton({
+  variable: "--font-anton",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const title = "VisaHub | One Destination, All Your Travel Needs";
@@ -77,7 +87,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${plusJakartaSans.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${plusJakartaSans.variable} ${anton.variable} h-full`}
+    >
       <body
         className="flex min-h-full flex-col antialiased"
         suppressHydrationWarning

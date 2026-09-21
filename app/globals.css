@@ -53,6 +53,10 @@
 
   /* Typography — Plus Jakarta Sans, named scale only (see CLAUDE.md §4) */
   --font-sans: var(--font-plus-jakarta-sans);
+  /* Reserved for hero/major-section headlines only — see the base-layer
+     rule below that applies it to text-display-hero(-mobile) and
+     text-headline-lg(-mobile) specifically. */
+  --font-headline: var(--font-anton);
 
   --text-display-hero: 56px;
   --text-display-hero--line-height: 64px;
@@ -163,6 +167,29 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Headliner-style display font — hero and major section titles only.  */
+/* Deliberately left OUTSIDE any @layer: Tailwind's own generated       */
+/* .text-display-hero/.text-headline-lg utilities (from the             */
+/* --text-*--letter-spacing / --font-weight theme tokens above) live in */
+/* the "utilities" cascade layer, which always beats "base" regardless  */
+/* of source order — an override placed inside @layer base was being   */
+/* silently discarded. Unlayered rules win over every @layer by spec,   */
+/* which is what actually lets this take effect.                        */
+/* ------------------------------------------------------------------ */
+.text-display-hero,
+.text-display-hero-mobile,
+.text-headline-lg,
+.text-headline-lg-mobile {
+  font-family: var(--font-headline);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  /* Anton's cap-height fills its line-box more than Plus Jakarta Sans did
+     at the same line-height, so the text below it reads as cramped —
+     padded out here rather than each component's own margin. */
+  padding-bottom: 0.2em;
 }
 
 /* ------------------------------------------------------------------ */
