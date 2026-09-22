@@ -12,6 +12,20 @@ export interface WorldCountry {
   code: string;
 }
 
+/**
+ * Region section boundaries within ALL_COUNTRIES, in file order — used to
+ * group the flat list into jump-to-region tabs without repeating a region
+ * field on every one of the 195 entries below.
+ */
+export const REGION_COUNTS = [
+  { name: "Africa", count: 54 },
+  { name: "Asia", count: 48 },
+  { name: "Europe", count: 44 },
+  { name: "North America", count: 23 },
+  { name: "South America", count: 12 },
+  { name: "Oceania", count: 14 },
+] as const;
+
 export const ALL_COUNTRIES: WorldCountry[] = [
   // Africa (54)
   { name: "Algeria", code: "DZ" },
@@ -220,3 +234,17 @@ export const ALL_COUNTRIES: WorldCountry[] = [
   { name: "Tuvalu", code: "TV" },
   { name: "Vanuatu", code: "VU" },
 ];
+
+export interface RegionGroup {
+  name: string;
+  countries: WorldCountry[];
+}
+
+export function getCountriesByRegion(): RegionGroup[] {
+  let cursor = 0;
+  return REGION_COUNTS.map(({ name, count }) => {
+    const countries = ALL_COUNTRIES.slice(cursor, cursor + count);
+    cursor += count;
+    return { name, countries };
+  });
+}

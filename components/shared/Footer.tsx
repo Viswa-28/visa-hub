@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Phone } from "lucide-react";
 import {
+  APPROVALS_COUNT,
   CONSULAR_DISCLAIMER,
   FOOTER_DOORSTEP_LINKS,
   FOOTER_GLOBAL_VISA_LINKS,
@@ -65,19 +67,19 @@ export function Footer() {
           <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 sm:justify-start">
             {FOOTER_LEGAL_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="hover:text-secondary transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
           <div className="flex flex-col items-center justify-between gap-2 pt-4 text-white/60 sm:flex-row">
             <p>
               &copy; {new Date().getFullYear()} {SITE_NAME}. All rights
-              reserved. 31k+ Approvals Globally.
+              reserved. {APPROVALS_COUNT} Approvals Globally.
             </p>
             <p className="font-medium">{SITE_TAGLINE}</p>
           </div>
@@ -102,12 +104,12 @@ function FooterColumn({
       <ul className="space-y-2">
         {links.map((link) => (
           <li key={link.label}>
-            <a
+            <Link
               href={link.href}
               className="hover:text-secondary transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

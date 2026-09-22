@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import * as Flags from "country-flag-icons/react/3x2";
 import { Search } from "lucide-react";
+import { whatsappHref } from "@/lib/constants";
 import type { CountryGuide } from "@/lib/visa-guide-data";
 
 const REGIONS = [
@@ -78,9 +79,18 @@ export function VisaGuideExplorer({
       {filtered.length === 0 ? (
         <p className="text-body-md text-neutral py-12 text-center">
           No destinations match &ldquo;{query}&rdquo;. Try another search or{" "}
-          <Link href="#doorstep-section" className="text-tertiary underline">
+          <a
+            href={whatsappHref(
+              query.trim()
+                ? `Hi VisaHub, I'd like to ask about a visa for ${query.trim()}`
+                : "Hi VisaHub, I'd like to ask about a visa destination",
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-tertiary underline"
+          >
             ask us directly
-          </Link>
+          </a>
           .
         </p>
       ) : (

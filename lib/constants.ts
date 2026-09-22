@@ -18,7 +18,7 @@ export const WHATSAPP_DEFAULT_HREF = whatsappHref(
 export const INSTAGRAM_HANDLE = "@usa_visa_hub___";
 export const INSTAGRAM_URL = "https://instagram.com/usa_visa_hub___";
 
-export const APPROVALS_COUNT = "31k+";
+export const APPROVALS_COUNT = "100k+";
 export const SERVICE_REGIONS = [
   "Chennai",
   "Coimbatore",
@@ -31,19 +31,19 @@ export const SERVICE_REGIONS = [
 
 export const FOOTER_SERVICE_LINKS = [
   { label: "Visa Consulting", href: "/visa" },
-  { label: "Flight Tickets", href: "#all-services" },
-  { label: "Dummy Tickets", href: "#all-services" },
-  { label: "Hotel Booking", href: "#all-services" },
-  { label: "Travel Insurance", href: "#all-services" },
-  { label: "Currency Exchange", href: "#all-services" },
+  { label: "Flight Tickets", href: "/#all-services" },
+  { label: "Dummy Tickets", href: "/#all-services" },
+  { label: "Hotel Booking", href: "/#all-services" },
+  { label: "Travel Insurance", href: "/#all-services" },
+  { label: "Currency Exchange", href: "/#all-services" },
 ] as const;
 
 export const FOOTER_DOORSTEP_LINKS = [
-  { label: "Chennai & Suburbs", href: "#doorstep-section" },
-  { label: "Coimbatore & Tirupur", href: "#doorstep-section" },
-  { label: "Madurai & Trichy", href: "#doorstep-section" },
-  { label: "Salem & Erode", href: "#doorstep-section" },
-  { label: "Corporate On-Site Visits", href: "#doorstep-section" },
+  { label: "Chennai & Suburbs", href: "/#doorstep-section" },
+  { label: "Coimbatore & Tirupur", href: "/#doorstep-section" },
+  { label: "Madurai & Trichy", href: "/#doorstep-section" },
+  { label: "Salem & Erode", href: "/#doorstep-section" },
+  { label: "Corporate On-Site Visits", href: "/#doorstep-section" },
 ] as const;
 
 export const FOOTER_GLOBAL_VISA_LINKS = [
@@ -61,49 +61,16 @@ export const FOOTER_LEGAL_LINKS = [
   { label: "Cookie Policy", href: "/cookies" },
 ] as const;
 
+export const NAV_LINKS = [
+  { label: "Visa Guide", href: "/visa" },
+  { label: "Doorstep Assistance", href: "/#doorstep-section" },
+  { label: "Countries", href: "/#countries-served" },
+  { label: "FAQ", href: "/#faq" },
+] as const;
+
 /**
  * Legally load-bearing — carry forward unchanged unless the user gives new
  * wording (CLAUDE.md §9).
  */
 export const CONSULAR_DISCLAIMER =
   "Consular Regulatory Notice: USA Visa Hub is an independent private travel concierge and documentation consultancy firm. We are not an official government embassy or affiliate of the U.S. Department of State, IRCC, or UKVI. Final visa grant decisions remain solely with consular officers.";
-
-/**
- * Only the destinations this consultancy actually serves (matches the
- * "USA • CANADA • UK • SCHENGEN • AUS & NZ" positioning used site-wide) —
- * unlike tripate.com's 240+ country claim, this list stays honest to scope.
- */
-export const COUNTRIES_SERVED = [
-  { name: "United States", code: "US" },
-  { name: "Canada", code: "CA" },
-  { name: "United Kingdom", code: "GB" },
-  { name: "Australia", code: "AU" },
-  { name: "New Zealand", code: "NZ" },
-  { name: "Austria", code: "AT" },
-  { name: "Belgium", code: "BE" },
-  { name: "Croatia", code: "HR" },
-  { name: "Czechia", code: "CZ" },
-  { name: "Denmark", code: "DK" },
-  { name: "Estonia", code: "EE" },
-  { name: "Finland", code: "FI" },
-  { name: "France", code: "FR" },
-  { name: "Germany", code: "DE" },
-  { name: "Greece", code: "GR" },
-  { name: "Hungary", code: "HU" },
-  { name: "Iceland", code: "IS" },
-  { name: "Italy", code: "IT" },
-  { name: "Latvia", code: "LV" },
-  { name: "Liechtenstein", code: "LI" },
-  { name: "Lithuania", code: "LT" },
-  { name: "Luxembourg", code: "LU" },
-  { name: "Malta", code: "MT" },
-  { name: "Netherlands", code: "NL" },
-  { name: "Norway", code: "NO" },
-  { name: "Poland", code: "PL" },
-  { name: "Portugal", code: "PT" },
-  { name: "Slovakia", code: "SK" },
-  { name: "Slovenia", code: "SI" },
-  { name: "Spain", code: "ES" },
-  { name: "Sweden", code: "SE" },
-  { name: "Switzerland", code: "CH" },
-] as const;

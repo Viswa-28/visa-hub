@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Plus_Jakarta_Sans } from "next/font/google";
 import {
+  APPROVALS_COUNT,
   PHONE_DISPLAY,
   SERVICE_REGIONS,
   SITE_NAME,
@@ -26,8 +27,7 @@ const anton = Anton({
 });
 
 const title = "VisaHub | One Destination, All Your Travel Needs";
-const description =
-  "Hassle-free travel and doorstep visa services for USA, Canada, UK, Schengen, Australia & New Zealand. 31k+ approvals, doorstep assistance across Tamil Nadu.";
+const description = `Hassle-free travel and doorstep visa services for USA, Canada, UK, Schengen, Australia & New Zealand. ${APPROVALS_COUNT} approvals, doorstep assistance across Tamil Nadu.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,7 +89,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${anton.variable} h-full`}
+      className={`${plusJakartaSans.variable} ${anton.variable} h-full scroll-smooth`}
     >
       <body
         className="flex min-h-full flex-col antialiased"
