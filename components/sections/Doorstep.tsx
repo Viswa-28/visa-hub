@@ -87,7 +87,9 @@ const PROCESS_STEPS: (ProcessStep & { icon: typeof FileSearch })[] = [
   },
 ];
 
-export function Doorstep() {
+export function Doorstep({ standalone = false }: { standalone?: boolean }) {
+  const Heading = standalone ? "h1" : "h2";
+
   return (
     <section
       className="border-outline-variant/60 bg-surface-container-low border-y py-20"
@@ -98,9 +100,9 @@ export function Doorstep() {
           <span className="border-primary/20 bg-primary/10 text-label-caps text-primary rounded-full border px-4 py-1.5 uppercase">
             Exclusive Service
           </span>
-          <h2 className="text-headline-lg-mobile text-primary md:text-display-hero-mobile mt-3">
+          <Heading className="text-headline-lg-mobile text-primary md:text-display-hero-mobile mt-3">
             Doorstep Visa Assistance
-          </h2>
+          </Heading>
           <p className="text-headline-sm text-tertiary mt-2">
             We Come to You, You Get Ready to Travel!
           </p>

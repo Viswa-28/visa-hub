@@ -62,10 +62,10 @@ export const FOOTER_LEGAL_LINKS = [
 ] as const;
 
 export const NAV_LINKS = [
-  { label: "Visa Guide", href: "/visa" },
-  { label: "Doorstep Assistance", href: "/#doorstep-section" },
-  { label: "Countries", href: "/#countries-served" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "Home", href: "/" },
+  { label: "Visa", href: "/visa" },
+  { label: "Doorstep Assistance", href: "/doorstep" },
+  { label: "About", href: "/about" },
 ] as const;
 
 /**
