@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sheet";
 import {
   NAV_LINKS,
-  PHONE_DISPLAY_SHORT,
+  PHONE_DISPLAY,
   PHONE_TEL_HREF,
   SITE_NAME,
   SITE_TAGLINE,
@@ -75,7 +75,7 @@ export function Header() {
             className="text-label-md hidden items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-700 transition-colors hover:bg-emerald-100 sm:flex"
           >
             <PhoneCall aria-hidden="true" className="size-4" />
-            {PHONE_DISPLAY_SHORT}
+            {PHONE_DISPLAY}
           </a>
           <Link
             href="/#doorstep-section"

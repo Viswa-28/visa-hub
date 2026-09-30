@@ -7,6 +7,20 @@ export interface VisaTypeGuide {
   steps: string[];
 }
 
+/**
+ * How the visa is obtained, not where the country is:
+ * - visa-free: nothing to arrange before flying (includes on-arrival entry)
+ * - e-visa: applied for online, approval arrives electronically
+ * - stamping: physical visa sticker via an embassy/consulate/VFS centre
+ */
+export type VisaCategory = "visa-free" | "e-visa" | "stamping";
+
+export const VISA_CATEGORY_LABELS: Record<VisaCategory, string> = {
+  "visa-free": "Visa Free",
+  "e-visa": "e-Visa",
+  stamping: "Stamping",
+};
+
 export interface CountryGuide {
   slug: string;
   name: string;
@@ -19,6 +33,7 @@ export interface CountryGuide {
     | "Africa"
     | "Oceania"
     | "South America";
+  category: VisaCategory;
   tagline: string;
   visaTypes: VisaTypeGuide[];
   faqs: { question: string; answer: string }[];
@@ -30,6 +45,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "United States of America",
     code: "US",
     region: "North America",
+    category: "stamping",
     tagline: "B1/B2 business & tourist, F-1 student, H-1B work, and J-1 exchange visas.",
     visaTypes: [
       {
@@ -140,6 +156,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Canada",
     code: "CA",
     region: "North America",
+    category: "stamping",
     tagline: "Visitor visa (TRV), Super Visa, study permits, and work permits.",
     visaTypes: [
       {
@@ -203,6 +220,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "United Kingdom",
     code: "GB",
     region: "Europe",
+    category: "stamping",
     tagline: "Standard Visitor visa, Student visa, and Skilled Worker visa.",
     visaTypes: [
       {
@@ -242,6 +260,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Schengen Area (Europe)",
     code: "EU",
     region: "Europe",
+    category: "stamping",
     tagline: "One short-stay visa for France, Germany, Italy, Spain & 23 more.",
     visaTypes: [
       {
@@ -283,6 +302,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Australia",
     code: "AU",
     region: "Oceania",
+    category: "e-visa",
     tagline: "Visitor visa (600), Student visa (500), and Working Holiday visa.",
     visaTypes: [
       {
@@ -322,6 +342,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "New Zealand",
     code: "NZ",
     region: "Oceania",
+    category: "e-visa",
     tagline: "Visitor visa and NZeTA for eligible short trips.",
     visaTypes: [
       {
@@ -354,6 +375,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "United Arab Emirates (Dubai)",
     code: "AE",
     region: "Middle East",
+    category: "e-visa",
     tagline: "Fast e-Visa/visit visa processing, often within 3-4 days.",
     visaTypes: [
       {
@@ -385,6 +407,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Singapore",
     code: "SG",
     region: "Asia",
+    category: "e-visa",
     tagline: "Straightforward e-Visa process for Indian tourists.",
     visaTypes: [
       {
@@ -417,6 +440,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Thailand",
     code: "TH",
     region: "Asia",
+    category: "e-visa",
     tagline: "e-Visa or visa-on-arrival for short tourist trips.",
     visaTypes: [
       {
@@ -448,6 +472,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Malaysia",
     code: "MY",
     region: "Asia",
+    category: "e-visa",
     tagline: "eNTRI/eVISA options make short visits simple.",
     visaTypes: [
       {
@@ -477,6 +502,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Japan",
     code: "JP",
     region: "Asia",
+    category: "stamping",
     tagline: "Tourist visa processed through an approved travel agent.",
     visaTypes: [
       {
@@ -510,6 +536,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "South Korea",
     code: "KR",
     region: "Asia",
+    category: "e-visa",
     tagline: "K-ETA for short visits or a standard tourist visa for longer stays.",
     visaTypes: [
       {
@@ -540,6 +567,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Vietnam",
     code: "VN",
     region: "Asia",
+    category: "e-visa",
     tagline: "Simple e-Visa for stays up to 90 days.",
     visaTypes: [
       {
@@ -566,6 +594,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Indonesia (Bali)",
     code: "ID",
     region: "Asia",
+    category: "visa-free",
     tagline: "Visa-on-arrival, extendable, for short tourist trips.",
     visaTypes: [
       {
@@ -592,6 +621,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Sri Lanka",
     code: "LK",
     region: "Asia",
+    category: "e-visa",
     tagline: "Fast Electronic Travel Authorization (ETA) online.",
     visaTypes: [
       {
@@ -614,6 +644,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Maldives",
     code: "MV",
     region: "Asia",
+    category: "visa-free",
     tagline: "Free visa on arrival for up to 30 days.",
     visaTypes: [
       {
@@ -641,6 +672,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Turkey",
     code: "TR",
     region: "Europe",
+    category: "e-visa",
     tagline: "Quick e-Visa application, usually approved within a day.",
     visaTypes: [
       {
@@ -663,6 +695,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Qatar",
     code: "QA",
     region: "Middle East",
+    category: "visa-free",
     tagline: "Visa-on-arrival for tourism, or a sponsor-based visit visa.",
     visaTypes: [
       {
@@ -690,6 +723,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Hong Kong",
     code: "HK",
     region: "Asia",
+    category: "stamping",
     tagline: "Pre-arranged visa required for Indian passport holders.",
     visaTypes: [
       {
@@ -717,6 +751,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "China",
     code: "CN",
     region: "Asia",
+    category: "stamping",
     tagline: "Standard tourist (L) visa through the Chinese Visa Application Service Centre.",
     visaTypes: [
       {
@@ -744,6 +779,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "South Africa",
     code: "ZA",
     region: "Africa",
+    category: "stamping",
     tagline: "Tourist visa via VFS Global, biometrics required.",
     visaTypes: [
       {
@@ -771,6 +807,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Egypt",
     code: "EG",
     region: "Africa",
+    category: "e-visa",
     tagline: "e-Visa available online for short tourist trips.",
     visaTypes: [
       {
@@ -793,6 +830,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Kenya",
     code: "KE",
     region: "Africa",
+    category: "e-visa",
     tagline: "Online eTA required before travel.",
     visaTypes: [
       {
@@ -815,6 +853,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Mexico",
     code: "MX",
     region: "South America",
+    category: "stamping",
     tagline: "Visa often waived if you hold a valid US visa — otherwise apply directly.",
     visaTypes: [
       {
@@ -840,6 +879,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Brazil",
     code: "BR",
     region: "South America",
+    category: "e-visa",
     tagline: "e-Visa application for tourism and business.",
     visaTypes: [
       {
@@ -862,6 +902,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Ireland",
     code: "IE",
     region: "Europe",
+    category: "stamping",
     tagline: "Separate short-stay visa — not covered by the Schengen visa.",
     visaTypes: [
       {
@@ -889,6 +930,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Cambodia",
     code: "KH",
     region: "Asia",
+    category: "e-visa",
     tagline: "e-Visa or visa-on-arrival for short trips.",
     visaTypes: [
       {
@@ -910,6 +952,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Philippines",
     code: "PH",
     region: "Asia",
+    category: "stamping",
     tagline: "Visa required for Indian passport holders, or via the e-Travel exemption schemes.",
     visaTypes: [
       {
@@ -932,6 +975,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Georgia",
     code: "GE",
     region: "Asia",
+    category: "e-visa",
     tagline: "Simple e-Visa, popular for both tourism and short business trips.",
     visaTypes: [
       {
@@ -954,6 +998,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Kazakhstan",
     code: "KZ",
     region: "Asia",
+    category: "e-visa",
     tagline: "e-Visa application ahead of travel.",
     visaTypes: [
       {
@@ -976,6 +1021,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Jordan",
     code: "JO",
     region: "Middle East",
+    category: "visa-free",
     tagline: "Visa on arrival available for most tourists.",
     visaTypes: [
       {
@@ -998,6 +1044,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Morocco",
     code: "MA",
     region: "Africa",
+    category: "stamping",
     tagline: "Visa required for Indian passport holders, applied via embassy.",
     visaTypes: [
       {
@@ -1020,6 +1067,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Mauritius",
     code: "MU",
     region: "Africa",
+    category: "visa-free",
     tagline: "Visa-free entry for short tourist stays.",
     visaTypes: [
       {
@@ -1047,6 +1095,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Seychelles",
     code: "SC",
     region: "Africa",
+    category: "visa-free",
     tagline: "Free visitor's permit issued on arrival.",
     visaTypes: [
       {
@@ -1074,6 +1123,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Nepal",
     code: "NP",
     region: "Asia",
+    category: "visa-free",
     tagline: "No visa required for Indian citizens with valid ID.",
     visaTypes: [
       {
@@ -1092,6 +1142,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Bhutan",
     code: "BT",
     region: "Asia",
+    category: "visa-free",
     tagline: "Entry permit for Indian nationals, arranged before travel.",
     visaTypes: [
       {
@@ -1114,6 +1165,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Israel",
     code: "IL",
     region: "Middle East",
+    category: "visa-free",
     tagline: "Visa-free entry for eligible tourist stays.",
     visaTypes: [
       {
@@ -1136,6 +1188,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Saudi Arabia",
     code: "SA",
     region: "Middle East",
+    category: "e-visa",
     tagline: "e-Visa for tourism, separate process for Umrah/work.",
     visaTypes: [
       {
@@ -1158,6 +1211,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Azerbaijan",
     code: "AZ",
     region: "Asia",
+    category: "e-visa",
     tagline: "Simple e-Visa (ASAN Visa) for short visits.",
     visaTypes: [
       {
@@ -1180,6 +1234,7 @@ export const COUNTRY_GUIDES: CountryGuide[] = [
     name: "Cyprus",
     code: "CY",
     region: "Europe",
+    category: "e-visa",
     tagline: "Pro-Visa online application, separate from the Schengen visa.",
     visaTypes: [
       {

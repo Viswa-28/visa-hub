@@ -21,8 +21,8 @@ export default function VisaGuidePage() {
           </h1>
           <p className="text-body-md text-on-surface-variant mt-2">
             Eligibility, documents, and processing time for{" "}
-            {COUNTRY_GUIDES.length}+ destinations — search or filter by
-            region below.
+            {COUNTRY_GUIDES.length}+ destinations — search, or filter by
+            visa free, e-Visa, and stamping below.
           </p>
         </div>
 

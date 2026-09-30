@@ -3,7 +3,6 @@ export const SITE_TAGLINE = "Your Journey, Our Expertise!";
 export const SITE_URL = "https://www.usavisahub.com";
 
 export const PHONE_DISPLAY = "+91 63691 53144";
-export const PHONE_DISPLAY_SHORT = "63691 53144";
 export const PHONE_TEL_HREF = "tel:+916369153144";
 export const WHATSAPP_NUMBER = "916369153144";
 

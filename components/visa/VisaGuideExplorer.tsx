@@ -5,18 +5,18 @@ import Link from "next/link";
 import * as Flags from "country-flag-icons/react/3x2";
 import { Search } from "lucide-react";
 import { whatsappHref } from "@/lib/constants";
-import type { CountryGuide } from "@/lib/visa-guide-data";
+import {
+  VISA_CATEGORY_LABELS,
+  type CountryGuide,
+  type VisaCategory,
+} from "@/lib/visa-guide-data";
 
-const REGIONS = [
-  "All",
-  "Asia",
-  "Europe",
-  "North America",
-  "Middle East",
-  "Africa",
-  "Oceania",
-  "South America",
-] as const;
+const FILTERS: { value: VisaCategory | "all"; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "visa-free", label: VISA_CATEGORY_LABELS["visa-free"] },
+  { value: "e-visa", label: VISA_CATEGORY_LABELS["e-visa"] },
+  { value: "stamping", label: VISA_CATEGORY_LABELS.stamping },
+];
 
 export function VisaGuideExplorer({
   countries,
@@ -24,16 +24,17 @@ export function VisaGuideExplorer({
   countries: CountryGuide[];
 }) {
   const [query, setQuery] = useState("");
-  const [region, setRegion] = useState<(typeof REGIONS)[number]>("All");
+  const [category, setCategory] = useState<VisaCategory | "all">("all");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return countries.filter((country) => {
-      const matchesRegion = region === "All" || country.region === region;
+      const matchesCategory =
+        category === "all" || country.category === category;
       const matchesQuery = !q || country.name.toLowerCase().includes(q);
-      return matchesRegion && matchesQuery;
+      return matchesCategory && matchesQuery;
     });
-  }, [countries, query, region]);
+  }, [countries, query, category]);
 
   return (
     <div>
@@ -56,22 +57,22 @@ export function VisaGuideExplorer({
 
       <div
         role="group"
-        aria-label="Filter by region"
+        aria-label="Filter by visa category"
         className="mb-8 flex flex-wrap justify-center gap-2"
       >
-        {REGIONS.map((option) => (
+        {FILTERS.map((option) => (
           <button
-            key={option}
+            key={option.value}
             type="button"
-            onClick={() => setRegion(option)}
-            aria-pressed={region === option}
+            onClick={() => setCategory(option.value)}
+            aria-pressed={category === option.value}
             className={`text-label-md rounded-full border px-4 py-1.5 transition-colors ${
-              region === option
+              category === option.value
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-card text-foreground/80 border-outline-variant hover:border-tertiary"
             }`}
           >
-            {option}
+            {option.label}
           </button>
         ))}
       </div>
@@ -101,18 +102,31 @@ export function VisaGuideExplorer({
               <Link
                 key={country.slug}
                 href={`/visa/${country.slug}`}
-                className="border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 flex items-start gap-3 rounded-lg border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2"
+                className="border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 relative isolate flex items-start gap-3 overflow-hidden rounded-lg border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2"
               >
+                {Flag && (
+                  <Flag
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-6 -right-8 -z-10 h-32 w-48 opacity-[0.14] blur-[2px] [mask-image:linear-gradient(to_right,transparent,black_75%)]"
+                  />
+                )}
+                <span className="from-card via-card/85 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r to-transparent" />
+
                 {Flag && (
                   <Flag
                     aria-hidden="true"
                     className="mt-0.5 h-5 w-7 shrink-0 rounded-[2px] object-cover"
                   />
                 )}
-                <div>
-                  <h3 className="text-label-lg text-primary">
-                    {country.name}
-                  </h3>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-label-lg text-primary">
+                      {country.name}
+                    </h3>
+                    <span className="border-tertiary/25 bg-tertiary/10 text-tertiary rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase">
+                      {VISA_CATEGORY_LABELS[country.category]}
+                    </span>
+                  </div>
                   <p className="text-body-sm text-on-surface-variant mt-0.5">
                     {country.tagline}
                   </p>

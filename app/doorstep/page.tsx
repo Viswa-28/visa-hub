@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Doorstep } from "@/components/sections/Doorstep";
+import { DoorstepBookingForm } from "@/components/sections/DoorstepBookingForm";
 import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -10,5 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default function DoorstepPage() {
-  return <Doorstep standalone />;
+  return (
+    <>
+      <Doorstep standalone />
+      <DoorstepBookingForm />
+    </>
+  );
 }

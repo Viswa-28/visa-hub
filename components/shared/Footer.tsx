@@ -51,10 +51,7 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterColumn
-            title="Our Core Services"
-            links={FOOTER_SERVICE_LINKS}
-          />
+          <FooterColumn title="Our Services" links={FOOTER_SERVICE_LINKS} />
           <FooterColumn
             title="Doorstep Assistance"
             links={FOOTER_DOORSTEP_LINKS}
