@@ -37,21 +37,27 @@ function sortByImportance(countries: WorldCountry[]) {
   });
 }
 
+/**
+ * Contents stack below md (flag above name) and sit on one line from md up.
+ * Width is left to the container, so the same tile works both in the mobile
+ * swipe row (fixed width) and in the expanded grid (full cell).
+ */
+const TILE_CLASSNAME =
+  "border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 flex flex-col items-start gap-2 rounded-xl border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2 md:flex-row md:items-center md:gap-2.5 md:rounded-lg";
+
 function CountryTile({ country }: { country: WorldCountry }) {
   const Flag = Flags[country.code as keyof typeof Flags];
   const guideSlug = GUIDE_SLUG_BY_CODE[country.code];
-  const tileClassName =
-    "border-outline-variant/60 bg-card hover:border-tertiary hover:ring-secondary/40 flex items-center gap-2.5 rounded-lg border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2";
 
   const content = (
     <>
       {Flag && (
         <Flag
           aria-hidden="true"
-          className="h-4 w-6 shrink-0 rounded-[2px] object-cover"
+          className="ring-outline-variant/40 h-6 w-9 shrink-0 rounded-[3px] object-cover ring-1 md:h-4 md:w-6 md:rounded-[2px]"
         />
       )}
-      <span className="text-label-md text-foreground/80 min-w-0 flex-1 truncate">
+      <span className="text-label-md text-foreground/80 line-clamp-2 min-w-0 flex-1 md:truncate">
         {country.name}
       </span>
       {guideSlug && (
@@ -64,7 +70,7 @@ function CountryTile({ country }: { country: WorldCountry }) {
 
   if (guideSlug) {
     return (
-      <Link href={`/visa/${guideSlug}`} className={tileClassName}>
+      <Link href={`/visa/${guideSlug}`} className={TILE_CLASSNAME}>
         {content}
       </Link>
     );
@@ -77,7 +83,7 @@ function CountryTile({ country }: { country: WorldCountry }) {
       )}
       target="_blank"
       rel="noopener noreferrer"
-      className={tileClassName}
+      className={TILE_CLASSNAME}
     >
       {content}
     </a>
@@ -108,16 +114,17 @@ export function CountriesServed() {
           </p>
         </div>
 
-        {/* Jump-to-region nav — plain anchors, no client JS needed. */}
+        {/* Jump-to-region nav — one scrollable line on mobile, wraps on
+            desktop. Plain anchors, no client JS needed. */}
         <nav
           aria-label="Jump to region"
-          className="mb-10 flex flex-wrap justify-center gap-2"
+          className="-mx-4 mb-10 flex snap-x gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0 [&::-webkit-scrollbar]:hidden"
         >
           {regionGroups.map((group) => (
             <a
               key={group.name}
               href={`#${regionSlug(group.name)}`}
-              className="text-label-md border-outline-variant bg-card text-foreground/80 hover:border-tertiary hover:text-tertiary rounded-full border px-4 py-1.5 transition-colors"
+              className="text-label-md border-outline-variant bg-card text-foreground/80 hover:border-tertiary hover:text-tertiary shrink-0 snap-start rounded-full border px-4 py-1.5 whitespace-nowrap transition-colors"
             >
               {group.name}{" "}
               <span className="opacity-70">({group.countries.length})</span>
@@ -125,7 +132,7 @@ export function CountriesServed() {
           ))}
         </nav>
 
-        <div className="space-y-10">
+        <div className="space-y-8 md:space-y-10">
           {regionGroups.map((group) => {
             const sorted = sortByImportance(group.countries);
             const visible = sorted.slice(0, VISIBLE_PER_REGION);
@@ -137,20 +144,36 @@ export function CountriesServed() {
                 id={regionSlug(group.name)}
                 className="scroll-mt-24"
               >
-                <h3 className="text-label-caps text-neutral mb-4 tracking-wide uppercase">
-                  {group.name}
-                </h3>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                  {visible.map((country) => (
-                    <CountryTile key={country.code} country={country} />
-                  ))}
+                <div className="border-outline-variant/60 mb-4 flex items-baseline justify-between gap-3 border-b pb-2">
+                  <h3 className="text-label-caps text-primary tracking-wide uppercase">
+                    {group.name}
+                  </h3>
+                  <span className="text-neutral text-[11px] whitespace-nowrap">
+                    {group.countries.length} countries
+                  </span>
+                </div>
+
+                <div className="relative">
+                  <div className="-mx-4 flex snap-x scroll-px-4 gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&>*]:w-[132px] [&>*]:shrink-0 [&>*]:snap-start md:mx-0 md:grid md:grid-cols-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-6 md:[&>*]:w-auto [&::-webkit-scrollbar]:hidden">
+                    {visible.map((country) => (
+                      <CountryTile key={country.code} country={country} />
+                    ))}
+                  </div>
+                  {/* Fade at the right edge hints there is more to swipe. */}
+                  <span
+                    aria-hidden="true"
+                    className="from-surface-container-low pointer-events-none absolute inset-y-0 -right-4 w-12 bg-gradient-to-l to-transparent md:hidden"
+                  />
                 </div>
 
                 {rest.length > 0 && (
                   <details className="group mt-3">
-                    <summary className="text-label-md text-tertiary hover:text-primary marker:content-[''] flex cursor-pointer list-none items-center gap-1">
+                    <summary className="text-label-md text-tertiary hover:text-primary marker:content-[''] inline-flex cursor-pointer list-none items-center gap-1">
                       View all {group.countries.length} in {group.name}
-                      <span aria-hidden="true" className="transition-transform group-open:rotate-180">
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform group-open:rotate-180"
+                      >
                         &#9662;
                       </span>
                     </summary>

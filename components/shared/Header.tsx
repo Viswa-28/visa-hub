@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, PhoneCall } from "lucide-react";
+import { cn } from "cn";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -79,11 +80,14 @@ export function Header() {
           </a>
           <Link
             href="/#doorstep-section"
-            className={`${buttonVariants({
-              size: "lg",
-              className:
-                "bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 gap-1.5",
-            })} hidden sm:inline-flex`}
+            className={cn(
+              buttonVariants({
+                size: "lg",
+                className:
+                  "bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 gap-1.5",
+              }),
+              "hidden sm:inline-flex",
+            )}
           >
             Book Doorstep Visit
             <ArrowRight aria-hidden="true" className="size-4" />
