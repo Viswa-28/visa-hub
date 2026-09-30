@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Plus_Jakarta_Sans } from "next/font/google";
+import { Anton, Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import {
   APPROVALS_COUNT,
   PHONE_DISPLAY,
@@ -24,6 +24,13 @@ const anton = Anton({
   variable: "--font-anton",
   subsets: ["latin"],
   weight: "400",
+});
+
+// Logo wordmark only — geometric shapes that echo the lettering in the mark.
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["600", "700"],
 });
 
 const title = "VisaHub | One Destination, All Your Travel Needs";
@@ -89,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${anton.variable} h-full scroll-smooth`}
+      className={`${plusJakartaSans.variable} ${anton.variable} ${outfit.variable} h-full scroll-smooth`}
     >
       <body
         className="flex min-h-full flex-col antialiased"

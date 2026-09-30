@@ -29,7 +29,7 @@ export function Footer() {
                 height={1024}
                 className="size-11 shrink-0 rounded-lg object-cover"
               />
-              <span className="text-headline-sm text-white">
+              <span className="font-brand text-[26px] leading-tight font-bold tracking-tight text-white">
                 Visa<span className="text-secondary">Hub</span>
               </span>
             </div>

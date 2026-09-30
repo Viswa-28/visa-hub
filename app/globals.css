@@ -57,6 +57,8 @@
      rule below that applies it to text-display-hero(-mobile) and
      text-headline-lg(-mobile) specifically. */
   --font-headline: var(--font-anton);
+  /* Logo wordmark only — geometric sans that matches the mark's lettering. */
+  --font-brand: var(--font-outfit);
 
   --text-display-hero: 56px;
   --text-display-hero--line-height: 64px;
