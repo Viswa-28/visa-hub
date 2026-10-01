@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import { PHONE_DISPLAY, WHATSAPP_DEFAULT_HREF } from "@/lib/constants";
 
 export function WhatsAppFab() {
@@ -28,7 +28,7 @@ export function WhatsAppFab() {
         bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
       }}
     >
-      <MessageCircle aria-hidden="true" className="size-7" />
+      <WhatsAppIcon aria-hidden="true" className="size-7" />
     </motion.a>
   );
 }

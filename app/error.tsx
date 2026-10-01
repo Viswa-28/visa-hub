@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { MessageCircle, PhoneCall, RotateCcw } from "lucide-react";
+import { PhoneCall, RotateCcw } from "lucide-react";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import {
   PHONE_DISPLAY,
   PHONE_TEL_HREF,
@@ -48,7 +49,7 @@ export default function Error({
             rel="noopener noreferrer"
             className="text-label-lg flex items-center gap-2 rounded-md bg-emerald-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-500"
           >
-            <MessageCircle aria-hidden="true" className="size-5" />
+            <WhatsAppIcon aria-hidden="true" className="size-5" />
             WhatsApp Us
           </a>
           <a

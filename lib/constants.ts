@@ -1,5 +1,5 @@
 export const SITE_NAME = "VisaHub";
-export const SITE_TAGLINE = "Your Journey, Our Expertise!";
+export const SITE_TAGLINE = "Connecting You to the World";
 /**
  * The www host is canonical: thevisahub.in issues a 308 to www.thevisahub.in,
  * so canonicals/sitemap/JSON-LD must use www or they point at a redirect.
@@ -35,7 +35,6 @@ export const SERVICE_REGIONS = [
 export const FOOTER_SERVICE_LINKS = [
   { label: "Visa Consulting", href: "/visa" },
   { label: "Flight Tickets", href: "/#all-services" },
-  { label: "Dummy Tickets", href: "/#all-services" },
   { label: "Hotel Booking", href: "/#all-services" },
   { label: "Travel Insurance", href: "/#all-services" },
   { label: "Currency Exchange", href: "/#all-services" },
@@ -43,23 +42,6 @@ export const FOOTER_SERVICE_LINKS = [
 
 /** Every "book a visit" CTA points here — the page that holds the form. */
 export const BOOKING_HREF = "/doorstep#book-doorstep";
-
-export const FOOTER_DOORSTEP_LINKS = [
-  { label: "Chennai & Suburbs", href: "/doorstep" },
-  { label: "Coimbatore & Tirupur", href: "/doorstep" },
-  { label: "Madurai & Trichy", href: "/doorstep" },
-  { label: "Salem & Erode", href: "/doorstep" },
-  { label: "Corporate On-Site Visits", href: BOOKING_HREF },
-] as const;
-
-export const FOOTER_GLOBAL_VISA_LINKS = [
-  { label: "USA Visa (B1/B2 & F-1)", href: "/visa/usa" },
-  { label: "Canada TRV & Study", href: "/visa/canada" },
-  { label: "UK Standard Visitor", href: "/visa/uk" },
-  { label: "27 Schengen Countries", href: "/visa/schengen" },
-  { label: "Australia & New Zealand", href: "/visa/australia" },
-  { label: "View Full Visa Guide", href: "/visa" },
-] as const;
 
 export const FOOTER_LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Compass, MessageCircle, PhoneCall } from "lucide-react";
+import { Compass, PhoneCall } from "lucide-react";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
 import { WhatsAppFab } from "@/components/shared/WhatsAppFab";
@@ -42,7 +43,7 @@ export default function NotFound() {
               rel="noopener noreferrer"
               className="text-label-lg flex items-center gap-2 rounded-md bg-emerald-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-500"
             >
-              <MessageCircle aria-hidden="true" className="size-5" />
+              <WhatsAppIcon aria-hidden="true" className="size-5" />
               WhatsApp Us
             </a>
             <a

@@ -1,25 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
+import { InstagramIcon } from "@/components/shared/InstagramIcon";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import {
   APPROVALS_COUNT,
   CONSULAR_DISCLAIMER,
-  FOOTER_DOORSTEP_LINKS,
-  FOOTER_GLOBAL_VISA_LINKS,
   FOOTER_LEGAL_LINKS,
   FOOTER_SERVICE_LINKS,
   INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
   PHONE_DISPLAY,
   PHONE_TEL_HREF,
   SITE_NAME,
   SITE_TAGLINE,
+  WHATSAPP_DEFAULT_HREF,
 } from "@/lib/constants";
 
 export function Footer() {
   return (
     <footer className="bg-primary text-body-sm border-t border-white/10 pt-16 pb-12 text-white/70">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-4">
           <div className="space-y-4 md:col-span-2">
             <div className="flex items-center gap-3">
               <Image
@@ -34,29 +36,54 @@ export function Footer() {
               </span>
             </div>
             <p className="text-body-sm max-w-sm text-white/70">
-              {SITE_TAGLINE} Premier flight bookings, dummy tickets, travel
-              insurance, foreign exchange, and doorstep visa consulting.
+              {SITE_TAGLINE} &mdash; premier flight bookings, travel insurance,
+              foreign exchange, and doorstep visa consulting.
             </p>
-            <div className="pt-2">
-              <a
-                href={PHONE_TEL_HREF}
-                className="hover:text-secondary flex items-center gap-2 font-bold text-white transition-colors"
-              >
-                <Phone aria-hidden="true" className="size-4 text-emerald-400" />
-                Call / WhatsApp: {PHONE_DISPLAY}
-              </a>
-              <p className="mt-1 text-[11px] text-white/50">
-                Instagram: {INSTAGRAM_HANDLE}
-              </p>
-            </div>
           </div>
 
           <FooterColumn title="Our Services" links={FOOTER_SERVICE_LINKS} />
-          <FooterColumn
-            title="Doorstep Assistance"
-            links={FOOTER_DOORSTEP_LINKS}
-          />
-          <FooterColumn title="Global Visas" links={FOOTER_GLOBAL_VISA_LINKS} />
+
+          <div>
+            <h4 className="text-label-md mb-3 tracking-wide text-white uppercase">
+              Contact
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <a
+                  href={PHONE_TEL_HREF}
+                  className="hover:text-secondary flex items-center gap-2 font-bold text-white transition-colors"
+                >
+                  <Phone aria-hidden="true" className="size-4 shrink-0 text-emerald-400" />
+                  {PHONE_DISPLAY}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={WHATSAPP_DEFAULT_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary flex items-center gap-2 transition-colors"
+                >
+                  <WhatsAppIcon
+                    aria-hidden="true"
+                    className="size-4 shrink-0 text-emerald-400"
+                  />
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary flex items-center gap-2 transition-colors"
+                >
+                  <InstagramIcon aria-hidden="true" className="size-4 shrink-0 text-rose-400" />
+                  {INSTAGRAM_HANDLE}
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="space-y-4 pt-8 text-[11px] text-white/60">
@@ -77,7 +104,8 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <div className="flex flex-col items-center justify-between gap-2 pt-4 text-white/60 sm:flex-row">
+          {/* Right padding keeps the tagline clear of the fixed WhatsApp FAB. */}
+          <div className="flex flex-col items-center justify-between gap-2 pt-4 text-white/60 sm:flex-row sm:pr-20">
             <p>
               &copy; {new Date().getFullYear()} {SITE_NAME}. All rights
               reserved. {APPROVALS_COUNT} Approvals Globally.

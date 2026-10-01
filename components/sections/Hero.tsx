@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { MessageCircle, PhoneCall, ShieldCheck } from "lucide-react";
+import { PhoneCall, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import { HeroSearchBar } from "@/components/sections/HeroSearchBar";
 import {
   APPROVALS_COUNT,
@@ -20,7 +21,7 @@ export function Hero() {
     <section className="bg-primary relative isolate overflow-hidden pt-10 pb-20 md:pt-16 md:pb-28">
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         <Image
-          src="/hero-flight-sky.png"
+          src="/hero-passport-gateway.png"
           alt=""
           fill
           priority
@@ -28,9 +29,10 @@ export function Hero() {
           className="object-cover object-center"
         />
         {/* Uniform navy scrim so text stays legible everywhere over the
-            photo — over sky, cloud, or the plane itself — rather than
-            relying on a shape that only protects one zone. */}
-        <div className="bg-primary/55 absolute inset-0" />
+            photo rather than relying on a shape that only protects one zone.
+            Heavier than the previous sky photo needed: this image has bright
+            sun glare and pale sky that white text disappears into. */}
+        <div className="bg-primary/70 absolute inset-0" />
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
@@ -76,7 +78,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-md bg-emerald-600 px-7 py-3.5 text-label-lg text-white shadow-lg shadow-emerald-900/20 transition-colors hover:bg-emerald-500 sm:w-auto"
           >
-            <MessageCircle aria-hidden="true" className="size-5" />
+            <WhatsAppIcon aria-hidden="true" className="size-5" />
             Chat on WhatsApp
           </a>
           <a

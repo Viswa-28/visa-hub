@@ -46,24 +46,28 @@ interface ManagingDirector {
   designation: string;
   /** Path to a photo in `public/`, or null to show the icon avatar. */
   photo: string | null;
-  bio: string[];
-  message: string;
+  /** Optional — each is omitted from the page until real copy is supplied. */
+  bio?: string[];
+  message?: string;
 }
 
 /**
- * Stays null until the real details are supplied — the section is skipped
- * entirely rather than publishing placeholder text. To enable it, fill this
- * in, e.g.:
- *
- *   const MANAGING_DIRECTOR: ManagingDirector | null = {
- *     name: "Full Name",
- *     designation: `Managing Director, ${SITE_NAME}`,
- *     photo: "/md-photo.jpg",
- *     bio: ["First paragraph…", "Second paragraph…"],
- *     message: "Message to clients…",
- *   };
+ * Draft copy for Mohan to review before publishing. It deliberately contains
+ * no factual claims — no years of experience, qualifications or past roles —
+ * because those cannot be invented on a named person's behalf. Add them here
+ * once confirmed; the layout already has room.
  */
-const MANAGING_DIRECTOR: ManagingDirector | null = null;
+const MANAGING_DIRECTOR: ManagingDirector | null = {
+  name: "Mohan",
+  designation: `Managing Director, ${SITE_NAME}`,
+  photo: "/mohan.png",
+  bio: [
+    "Mohan leads VisaHub on a simple conviction: most applications run into trouble over preparation, not over the applicant. A missing statement, a form filled in haste, an interview nobody rehearsed — these are the things that cost people their trip, and all of them are avoidable.",
+    "That belief shaped how the firm works. Counselors travel to the client rather than the other way around, documents are checked face to face, and nothing reaches a consulate until the applicant has seen it and agreed to it. He holds the team to one standard above all: the person applying should always understand what is in their own file.",
+  ],
+  message:
+    "You should never have to wonder what is happening with your application. Our counselor comes to your home or office, explains every form in plain language, and stays with you through to your appointment. We cannot promise you a visa — nobody honestly can, because that decision belongs to the consular officer. What we can promise is that your file will be complete, accurate, and ready.",
+};
 
 const SERVICES = [
   {
@@ -287,28 +291,29 @@ export default function AboutPage() {
             <p className="text-label-md text-tertiary mt-1 uppercase">
               {MANAGING_DIRECTOR.designation}
             </p>
-            <div className="mt-4 space-y-3">
-              {MANAGING_DIRECTOR.bio.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-body-sm text-on-surface-variant"
-                >
-                  {paragraph}
+            {MANAGING_DIRECTOR.bio && (
+              <div className="mt-4 space-y-3">
+                {MANAGING_DIRECTOR.bio.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="text-body-sm text-on-surface-variant"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
+            {MANAGING_DIRECTOR.message && (
+              <blockquote className="border-tertiary/20 bg-tertiary/5 mt-5 rounded-lg border p-4">
+                <Quote aria-hidden="true" className="text-tertiary mb-2 size-5" />
+                <p className="text-body-sm text-on-surface-variant italic">
+                  {MANAGING_DIRECTOR.message}
                 </p>
-              ))}
-            </div>
-            <blockquote className="border-tertiary/20 bg-tertiary/5 mt-5 rounded-lg border p-4">
-              <Quote
-                aria-hidden="true"
-                className="text-tertiary mb-2 size-5"
-              />
-              <p className="text-body-sm text-on-surface-variant italic">
-                {MANAGING_DIRECTOR.message}
-              </p>
-              <footer className="text-label-md text-primary mt-2">
-                &mdash; {MANAGING_DIRECTOR.name}
-              </footer>
-            </blockquote>
+                <footer className="text-label-md text-primary mt-2">
+                  &mdash; {MANAGING_DIRECTOR.name}
+                </footer>
+              </blockquote>
+            )}
           </div>
         </div>
       </Section>

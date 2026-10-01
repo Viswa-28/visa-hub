@@ -50,8 +50,8 @@ export function Header() {
             className="size-12 shrink-0 rounded-lg object-cover sm:size-14"
           />
           <span className="min-w-0">
-            <span className="font-brand text-primary block truncate text-[26px] leading-tight font-bold tracking-tight sm:text-[28px]">
-              Visa<span className="text-tertiary">Hub</span>
+            <span className="font-brand text-brand-visa block truncate text-[26px] leading-tight font-bold tracking-tight sm:text-[28px]">
+              Visa<span className="text-brand-hub">Hub</span>
             </span>
             <span className="text-label-md text-neutral hidden truncate tracking-wide uppercase sm:block">
               {SITE_TAGLINE}

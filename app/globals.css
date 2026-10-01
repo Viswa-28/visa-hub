@@ -17,6 +17,7 @@
   --color-secondary-foreground: #071b3b;
   --color-tertiary: #2563eb; /* Royal Atlantic Blue — CTA buttons, hover states */
   --color-tertiary-foreground: #ffffff;
+
   --color-neutral: #64748b; /* Slate — metadata, labels, dividers */
   --color-neutral-foreground: #ffffff;
 
@@ -169,6 +170,27 @@
   html {
     @apply font-sans;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Logo wordmark. Both halves carry a vertical gradient that darkens    */
+/* toward the baseline, sampled straight from the "Visa hub" lettering  */
+/* in logo.jpeg (y 732-815) rather than eyeballed. Unlayered so it      */
+/* beats Tailwind's own text-colour utilities. Light surfaces only —    */
+/* these are far too dark to read on the navy footer, which keeps its   */
+/* white/cyan wordmark instead.                                         */
+/* ------------------------------------------------------------------ */
+.text-brand-visa,
+.text-brand-hub {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-brand-visa {
+  background-image: linear-gradient(180deg, #5d369b 0%, #4d2a8f 100%);
+}
+.text-brand-hub {
+  background-image: linear-gradient(180deg, #d94598 0%, #963184 100%);
 }
 
 /* ------------------------------------------------------------------ */
