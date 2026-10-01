@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { SITE_NAME } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Cookie Policy | ${SITE_NAME}`,
+  title: "Cookie Policy",
+  alternates: { canonical: "/cookies" },
   description: `How ${SITE_NAME} uses cookies and similar technologies on this website.`,
 };
 

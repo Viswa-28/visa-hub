@@ -59,8 +59,12 @@ export function Footer() {
           <FooterColumn title="Global Visas" links={FOOTER_GLOBAL_VISA_LINKS} />
         </div>
 
-        <div className="space-y-4 pt-8 text-[11px] text-white/50">
-          <p>{CONSULAR_DISCLAIMER}</p>
+        <div className="space-y-4 pt-8 text-[11px] text-white/60">
+          {/* Legally required notice — kept at readable contrast rather than
+              the muted size/colour used for the rest of this block. */}
+          <p className="text-body-sm rounded-lg border border-white/15 bg-white/5 p-4 text-white/80">
+            {CONSULAR_DISCLAIMER}
+          </p>
           <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1 sm:justify-start">
             {FOOTER_LEGAL_LINKS.map((link) => (
               <li key={link.href}>

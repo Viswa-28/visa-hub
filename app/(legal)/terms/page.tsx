@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { CONSULAR_DISCLAIMER, SITE_NAME, whatsappHref } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Terms & Conditions | ${SITE_NAME}`,
+  title: "Terms & Conditions",
+  alternates: { canonical: "/terms" },
   description: `The terms governing visa consultancy, doorstep assistance, flight, dummy ticket, hotel, and insurance services provided by ${SITE_NAME}.`,
 };
 

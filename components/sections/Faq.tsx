@@ -62,12 +62,26 @@ const FAQS: FaqItem[] = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+};
+
 export function Faq() {
   return (
     <section
       className="border-outline-variant/60 bg-surface-container-low border-t py-16"
       id="faq"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <div className="mb-10 text-center">
           <h2 className="text-headline-md text-primary sm:text-headline-lg">

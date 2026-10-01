@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import {
-  APPROVALS_COUNT,
+  INSTAGRAM_URL,
   PHONE_DISPLAY,
   SERVICE_REGIONS,
   SITE_NAME,
@@ -33,35 +33,38 @@ const outfit = Outfit({
   weight: ["600", "700"],
 });
 
-const title = "VisaHub | One Destination, All Your Travel Needs";
-const description = `Hassle-free travel and doorstep visa services for USA, Canada, UK, Schengen, Australia & New Zealand. ${APPROVALS_COUNT} approvals, doorstep assistance across Tamil Nadu.`;
+// Kept under ~60 chars so Google doesn't truncate it in results.
+const title = `Doorstep Visa Consultant in Tamil Nadu | ${SITE_NAME}`;
+const socialTitle = "Expert Visa Consulting, With Doorstep Filing";
+const description = `USA, Canada, UK, Schengen & Australia visa consulting with doorstep document assistance across Chennai, Coimbatore, Madurai & Trichy. Our counselor visits you.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title,
+  // Child routes set their own title; this suffixes it with the brand.
+  title: { default: title, template: `%s | ${SITE_NAME}` },
   description,
   keywords: [
-    "USA visa consultant Tamil Nadu",
+    "visa consultant Tamil Nadu",
+    "USA visa consultant Chennai",
     "doorstep visa assistance",
-    "Canada visa agent",
+    "Canada visa agent Coimbatore",
     "Schengen visa Chennai",
     "dummy ticket for visa",
-    "visa guide by country",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title,
+    title: socialTitle,
     description,
     siteName: SITE_NAME,
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
+    locale: "en_IN",
+    // og:image comes from app/opengraph-image.tsx (generated, not a static file).
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: socialTitle,
     description,
-    images: ["/og-image.png"],
   },
 };
 
@@ -71,12 +74,21 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+// TODO: add streetAddress, addressLocality, postalCode and geo once the
+// registered office address is confirmed — without them Google will not
+// produce a local-business rich result.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
+  "@id": `${SITE_URL}/#organization`,
   name: SITE_NAME,
-  description: SITE_TAGLINE,
+  url: SITE_URL,
+  description,
+  slogan: SITE_TAGLINE,
   telephone: PHONE_DISPLAY,
+  image: `${SITE_URL}/logo.jpeg`,
+  logo: `${SITE_URL}/logo.jpeg`,
+  sameAs: [INSTAGRAM_URL],
   areaServed: SERVICE_REGIONS.map((city) => ({
     "@type": "City",
     name: city,

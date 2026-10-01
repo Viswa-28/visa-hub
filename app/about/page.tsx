@@ -28,28 +28,42 @@ import {
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
 export const metadata: Metadata = {
-  title: `About Us | ${SITE_NAME}`,
+  title: "About Us — Doorstep Visa Consultancy in Tamil Nadu",
   description:
     "VisaHub is a Tamil Nadu-based visa consultancy built around doorstep assistance — our counselors visit you, not the other way around.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    url: "/about",
+    title: `About Us — Doorstep Visa Consultancy in Tamil Nadu | ${SITE_NAME}`,
+    description:
+      "VisaHub is a Tamil Nadu-based visa consultancy built around doorstep assistance — our counselors visit you, not the other way around.",
+  },
 };
 
+interface ManagingDirector {
+  name: string;
+  designation: string;
+  /** Path to a photo in `public/`, or null to show the icon avatar. */
+  photo: string | null;
+  bio: string[];
+  message: string;
+}
+
 /**
- * PLACEHOLDER — replace with the real Managing Director details before
- * this page goes live. Drop a photo in `public/` and set `photo` to its
- * path (e.g. "/md-photo.jpg"); leaving it null renders the icon avatar.
+ * Stays null until the real details are supplied — the section is skipped
+ * entirely rather than publishing placeholder text. To enable it, fill this
+ * in, e.g.:
+ *
+ *   const MANAGING_DIRECTOR: ManagingDirector | null = {
+ *     name: "Full Name",
+ *     designation: `Managing Director, ${SITE_NAME}`,
+ *     photo: "/md-photo.jpg",
+ *     bio: ["First paragraph…", "Second paragraph…"],
+ *     message: "Message to clients…",
+ *   };
  */
-const MANAGING_DIRECTOR = {
-  name: "[Managing Director name]",
-  designation: `Managing Director, ${SITE_NAME}`,
-  photo: null as string | null,
-  bio: [
-    "[Add a short professional background here — years in the travel and visa documentation industry, the consulates and visa categories handled, and any prior roles that built this expertise.]",
-    "[Add the vision behind VisaHub and the commitment made to every client.]",
-  ],
-  message:
-    "[Add the Managing Director's message to clients — why the doorstep model was chosen, and what every client can expect when they work with VisaHub.]",
-};
+const MANAGING_DIRECTOR: ManagingDirector | null = null;
 
 const SERVICES = [
   {
@@ -244,6 +258,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {MANAGING_DIRECTOR && (
       <Section id="managing-director" title="Meet Our Managing Director" tone="card">
         <div className="border-outline-variant bg-surface-container-low mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 rounded-xl border p-6 shadow-sm sm:p-8 md:grid-cols-5">
           <div className="md:col-span-2">
@@ -297,6 +312,7 @@ export default function AboutPage() {
           </div>
         </div>
       </Section>
+      )}
 
       <Section id="mission-vision" title="Our Mission &amp; Vision">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">

@@ -4,8 +4,15 @@ import { SITE_NAME, whatsappHref } from "@/lib/constants";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
 export const metadata: Metadata = {
-  title: `Visa Guide — ${COUNTRY_GUIDES.length} Destinations | ${SITE_NAME}`,
+  title: `Visa Guide — ${COUNTRY_GUIDES.length} Destinations, Documents & Process`,
   description: `Eligibility, required documents, and step-by-step process for ${COUNTRY_GUIDES.length}+ visa destinations — tourist, student, and work visas, explained clearly.`,
+  alternates: { canonical: "/visa" },
+  openGraph: {
+    type: "website",
+    url: "/visa",
+    title: `Visa Guide — ${COUNTRY_GUIDES.length} Destinations | ${SITE_NAME}`,
+    description: `Eligibility, required documents, and step-by-step process for ${COUNTRY_GUIDES.length}+ visa destinations — tourist, student, and work visas, explained clearly.`,
+  },
 };
 
 export default function VisaGuidePage() {

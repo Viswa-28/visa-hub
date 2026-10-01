@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
+  BOOKING_HREF,
   NAV_LINKS,
   PHONE_DISPLAY,
   PHONE_TEL_HREF,
@@ -71,15 +72,17 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Icon-only below sm so mobile still has a one-tap call button. */}
           <a
             href={PHONE_TEL_HREF}
-            className="text-label-md hidden items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-700 transition-colors hover:bg-emerald-100 sm:flex"
+            aria-label={`Call ${PHONE_DISPLAY}`}
+            className="text-label-md flex min-h-11 items-center gap-1.5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-700 transition-colors hover:bg-emerald-100"
           >
             <PhoneCall aria-hidden="true" className="size-4" />
-            {PHONE_DISPLAY}
+            <span className="hidden sm:inline">{PHONE_DISPLAY}</span>
           </a>
           <Link
-            href="/#doorstep-section"
+            href={BOOKING_HREF}
             className={cn(
               buttonVariants({
                 size: "lg",
@@ -118,7 +121,7 @@ export function Header() {
                   </Link>
                 ))}
                 <Link
-                  href="/#doorstep-section"
+                  href={BOOKING_HREF}
                   onClick={() => setIsMobileNavOpen(false)}
                   className={`${buttonVariants({
                     size: "lg",

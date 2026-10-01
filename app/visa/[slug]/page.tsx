@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import * as Flags from "country-flag-icons/react/3x2";
 import { Calendar, CheckCircle2, ChevronLeft, FileText } from "lucide-react";
-import { SITE_NAME, whatsappHref } from "@/lib/constants";
+import { SITE_NAME, SITE_URL, whatsappHref } from "@/lib/constants";
 import { COUNTRY_GUIDES, getCountryGuideBySlug } from "@/lib/visa-guide-data";
 
 export function generateStaticParams() {
@@ -18,9 +18,22 @@ export async function generateMetadata({
   const { slug } = await params;
   const country = getCountryGuideBySlug(slug);
   if (!country) return {};
+
+  const title = `${country.name} Visa Guide — Documents & Process`;
+  const description = `${country.tagline} Eligibility, required documents, and step-by-step process for a ${country.name} visa.`;
+  const path = `/visa/${country.slug}`;
+
   return {
-    title: `${country.name} Visa Guide — Documents & Process | ${SITE_NAME}`,
-    description: `${country.tagline} Eligibility, required documents, and step-by-step process for a ${country.name} visa.`,
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "article",
+      url: path,
+      title: `${title} | ${SITE_NAME}`,
+      description,
+    },
+    twitter: { title: `${title} | ${SITE_NAME}`, description },
   };
 }
 
@@ -35,8 +48,32 @@ export default async function CountryVisaGuidePage({
 
   const Flag = Flags[country.code as keyof typeof Flags];
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Visa Guide",
+        item: `${SITE_URL}/visa`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: country.name,
+        item: `${SITE_URL}/visa/${country.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="py-12 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/visa"

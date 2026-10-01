@@ -1,4 +1,6 @@
+import Link from "next/link";
 import {
+  ArrowRight,
   Calendar,
   CalendarCheck,
   Car,
@@ -12,7 +14,7 @@ import {
   ShieldQuestion,
   UserCheck,
 } from "lucide-react";
-import { whatsappHref } from "@/lib/constants";
+import { BOOKING_HREF, whatsappHref } from "@/lib/constants";
 import type { ProcessStep } from "@/lib/types";
 
 const CHALLENGES = [
@@ -213,6 +215,22 @@ export function Doorstep({ standalone = false }: { standalone?: boolean }) {
           </div>
         </div>
 
+        {/* Full process rail lives only on /doorstep — the homepage links
+            across instead, so the two pages aren't near-duplicates competing
+            for the same keyword. */}
+        {!standalone && (
+          <div className="mb-10 text-center">
+            <Link
+              href={BOOKING_HREF}
+              className="bg-primary text-primary-foreground hover:bg-tertiary text-label-lg inline-flex items-center gap-2 rounded-md px-6 py-3.5 shadow-md transition-colors"
+            >
+              See how doorstep assistance works
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          </div>
+        )}
+
+        {standalone && (
         <div
           className="border-outline-variant/60 bg-card mb-10 rounded-xl border p-6 shadow-sm sm:p-8"
           id="process"
@@ -245,6 +263,7 @@ export function Doorstep({ standalone = false }: { standalone?: boolean }) {
             ))}
           </div>
         </div>
+        )}
 
         <div className="from-primary via-primary to-tertiary flex flex-col items-center justify-between gap-6 rounded-xl bg-gradient-to-r p-6 text-white shadow-xl sm:p-8 md:flex-row">
           <div className="flex items-center gap-5">

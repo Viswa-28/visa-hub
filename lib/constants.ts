@@ -1,6 +1,10 @@
 export const SITE_NAME = "VisaHub";
 export const SITE_TAGLINE = "Your Journey, Our Expertise!";
-export const SITE_URL = "https://www.usavisahub.com";
+/**
+ * The www host is canonical: thevisahub.in issues a 308 to www.thevisahub.in,
+ * so canonicals/sitemap/JSON-LD must use www or they point at a redirect.
+ */
+export const SITE_URL = "https://www.thevisahub.in";
 
 export const PHONE_DISPLAY = "+91 63691 53144";
 export const PHONE_TEL_HREF = "tel:+916369153144";
@@ -37,12 +41,15 @@ export const FOOTER_SERVICE_LINKS = [
   { label: "Currency Exchange", href: "/#all-services" },
 ] as const;
 
+/** Every "book a visit" CTA points here — the page that holds the form. */
+export const BOOKING_HREF = "/doorstep#book-doorstep";
+
 export const FOOTER_DOORSTEP_LINKS = [
-  { label: "Chennai & Suburbs", href: "/#doorstep-section" },
-  { label: "Coimbatore & Tirupur", href: "/#doorstep-section" },
-  { label: "Madurai & Trichy", href: "/#doorstep-section" },
-  { label: "Salem & Erode", href: "/#doorstep-section" },
-  { label: "Corporate On-Site Visits", href: "/#doorstep-section" },
+  { label: "Chennai & Suburbs", href: "/doorstep" },
+  { label: "Coimbatore & Tirupur", href: "/doorstep" },
+  { label: "Madurai & Trichy", href: "/doorstep" },
+  { label: "Salem & Erode", href: "/doorstep" },
+  { label: "Corporate On-Site Visits", href: BOOKING_HREF },
 ] as const;
 
 export const FOOTER_GLOBAL_VISA_LINKS = [

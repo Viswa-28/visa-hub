@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { PHONE_DISPLAY, SITE_NAME, whatsappHref } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: `Privacy Policy | ${SITE_NAME}`,
+  title: "Privacy Policy",
+  alternates: { canonical: "/privacy" },
   description: `How ${SITE_NAME} collects, uses, and protects your personal and passport information during visa, travel, and doorstep consultancy services.`,
 };
 
