@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import {
   INSTAGRAM_URL,
   PHONE_DISPLAY,
@@ -10,27 +10,36 @@ import {
 } from "@/lib/constants";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+/**
+ * Self-hosted rather than next/font/google. Google-hosted fonts are fetched at
+ * build time, so a blocked or rate-limited request from the CI builder fails
+ * the whole deployment ("An error occurred in `next/font`"). These are the
+ * same latin woff2 files Google serves, committed to the repo so builds have
+ * no external dependency. Licensed OFL/Apache — self-hosting is permitted.
+ */
+const plusJakartaSans = localFont({
+  src: "./fonts/PlusJakartaSans-Variable.woff2",
   variable: "--font-plus-jakarta-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "300 800",
+  display: "swap",
 });
 
-// Closest free Google Fonts equivalent to the tall, ultra-heavy condensed
-// "Headliner" display face requested — that specific font is a commercial
-// product not distributed on Google Fonts, so it can't be self-hosted via
-// next/font/google. Anton matches the same poster-headline character.
-const anton = Anton({
+// Closest free equivalent to the tall, ultra-heavy condensed "Headliner"
+// display face requested — that one is a commercial product, so Anton stands
+// in for the same poster-headline character.
+const anton = localFont({
+  src: "./fonts/Anton-Regular.woff2",
   variable: "--font-anton",
-  subsets: ["latin"],
   weight: "400",
+  display: "swap",
 });
 
 // Logo wordmark only — geometric shapes that echo the lettering in the mark.
-const outfit = Outfit({
+const outfit = localFont({
+  src: "./fonts/Outfit-Variable.woff2",
   variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: "600 700",
+  display: "swap",
 });
 
 // Kept under ~60 chars so Google doesn't truncate it in results.
