@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { doorstepBookingSchema } from "@/lib/doorstep-booking";
+import { contactFormSchema } from "@/lib/contact-form";
 import { clientIp, deliverLead, isRateLimited } from "@/lib/leads";
 
 export const maxDuration = 10;
@@ -25,37 +25,48 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const parsed = doorstepBookingSchema.safeParse(body);
+  const parsed = contactFormSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
   }
 
-  const { name, mobile, address, dob } = parsed.data;
+  const { name, email, phone, destination, message, company } = parsed.data;
+
+  // Honeypot tripped. Answer 200 so a bot can't tell it was caught, but log
+  // the payload: if a browser ever autofills the hidden field, that's a real
+  // enquiry being dropped and it must stay recoverable from the logs.
+  if (company) {
+    console.warn(
+      `[lead:contact] HONEYPOT ${JSON.stringify({ name, email, phone, destination })}`,
+    );
+    return NextResponse.json({ ok: true });
+  }
 
   const result = await deliverLead({
-    source: "doorstep-booking",
-    subject: `New doorstep booking — ${name} (${mobile})`,
-    phone: mobile,
+    source: "contact",
+    subject: `New enquiry — ${name} (${destination})`,
+    phone,
     fields: [
       { label: "Name", value: name },
-      { label: "Mobile", value: mobile },
-      { label: "Address", value: address },
-      { label: "Date of Birth", value: dob },
+      { label: "Email", value: email },
+      { label: "Phone", value: phone },
+      { label: "Travelling to", value: destination },
+      ...(message ? [{ label: "Message", value: message }] : []),
     ],
     row: {
       name,
-      email: "",
-      phone: mobile,
-      destination: "",
-      message: "",
-      address,
-      dob,
+      email,
+      phone,
+      destination,
+      message: message ?? "",
+      address: "",
+      dob: "",
     },
   });
 
   if (!result.delivered) {
     return NextResponse.json(
-      { error: "Could not record your booking." },
+      { error: "Could not send your enquiry." },
       { status: 502 },
     );
   }

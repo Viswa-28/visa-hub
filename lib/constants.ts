@@ -67,6 +67,7 @@ export const NAV_LINKS = [
   { label: "Visa", href: "/visa" },
   { label: "Doorstep Assistance", href: "/doorstep" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /**
