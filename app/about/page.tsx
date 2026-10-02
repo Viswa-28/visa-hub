@@ -23,6 +23,7 @@ import { SocialProof } from "@/components/sections/SocialProof";
 import {
   APPROVALS_COUNT,
   CONSULAR_DISCLAIMER,
+  OG_IMAGE,
   SITE_NAME,
 } from "@/lib/constants";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
@@ -38,7 +39,9 @@ export const metadata: Metadata = {
     title: `About Us — Doorstep Visa Consultancy in Tamil Nadu | ${SITE_NAME}`,
     description:
       "VisaHub is a Tamil Nadu-based visa consultancy built around doorstep assistance — our counselors visit you, not the other way around.",
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 interface ManagingDirector {
@@ -269,7 +272,7 @@ export default function AboutPage() {
             {MANAGING_DIRECTOR.photo ? (
               <Image
                 src={MANAGING_DIRECTOR.photo}
-                alt={MANAGING_DIRECTOR.name}
+                alt={`${MANAGING_DIRECTOR.name}, ${MANAGING_DIRECTOR.designation}`}
                 width={640}
                 height={800}
                 className="border-outline-variant aspect-[4/5] w-full rounded-xl border object-cover shadow-md"

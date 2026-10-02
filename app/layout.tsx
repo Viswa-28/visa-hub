@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@/components/shared/Analytics";
 import {
   INSTAGRAM_URL,
   PHONE_DISPLAY,
@@ -42,8 +43,9 @@ const outfit = localFont({
   display: "swap",
 });
 
-// Kept under ~60 chars so Google doesn't truncate it in results.
-const title = `Doorstep Visa Consultant in Tamil Nadu | ${SITE_NAME}`;
+// Kept under ~60 chars so Google doesn't truncate it in results. Leads with
+// the city because local intent ("visa consultant madurai") converts hardest.
+const title = `Visa Consultant in Madurai — Doorstep Service | ${SITE_NAME}`;
 const socialTitle = "Expert Visa Consulting, With Doorstep Filing";
 const description = `USA, Canada, UK, Schengen & Australia visa consulting with doorstep document assistance across Chennai, Coimbatore, Madurai & Trichy. Our counselor visits you.`;
 
@@ -53,14 +55,19 @@ export const metadata: Metadata = {
   title: { default: title, template: `%s | ${SITE_NAME}` },
   description,
   keywords: [
-    "visa consultant Tamil Nadu",
+    "visa consultant Madurai",
+    "visa agent Tamil Nadu",
     "USA visa consultant Chennai",
     "doorstep visa assistance",
     "Canada visa agent Coimbatore",
-    "Schengen visa Chennai",
-    "dummy ticket for visa",
+    "Schengen visa Madurai",
   ],
   alternates: { canonical: "/" },
+  // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in the host env to emit the
+  // Search Console meta tag; omitted entirely while unset.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   openGraph: {
     type: "website",
     url: SITE_URL,
@@ -83,9 +90,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-// TODO: add streetAddress, addressLocality, postalCode and geo once the
-// registered office address is confirmed — without them Google will not
-// produce a local-business rich result.
+// TODO: streetAddress, postalCode, geo coordinates and openingHours are still
+// missing — Google needs a full street address before it will show a local
+// rich result or tie this to a Google Business Profile.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
@@ -98,14 +105,31 @@ const jsonLd = {
   image: `${SITE_URL}/logo.jpeg`,
   logo: `${SITE_URL}/logo.jpeg`,
   sameAs: [INSTAGRAM_URL],
+  priceRange: "$$",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Madurai",
+    addressRegion: "Tamil Nadu",
+    addressCountry: "IN",
+  },
   areaServed: SERVICE_REGIONS.map((city) => ({
     "@type": "City",
     name: city,
   })),
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "Tamil Nadu",
-    addressCountry: "IN",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Visa & Travel Services",
+    itemListElement: [
+      "Visa Consulting",
+      "Doorstep Visa Assistance",
+      "Flight Tickets",
+      "Hotel Booking",
+      "Travel Insurance",
+      "Currency Exchange",
+    ].map((service) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: service },
+    })),
   },
 };
 
@@ -116,7 +140,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${plusJakartaSans.variable} ${anton.variable} ${outfit.variable} h-full scroll-smooth`}
     >
       <body
@@ -130,6 +154,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

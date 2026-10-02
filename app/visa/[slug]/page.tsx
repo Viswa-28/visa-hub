@@ -2,8 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import * as Flags from "country-flag-icons/react/3x2";
-import { Calendar, CheckCircle2, ChevronLeft, FileText } from "lucide-react";
-import { SITE_NAME, SITE_URL, whatsappHref } from "@/lib/constants";
+import {
+  Calendar,
+  CheckCircle2,
+  ChevronLeft,
+  FileText,
+  PhoneCall,
+} from "lucide-react";
+import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
+import {
+  OG_IMAGE,
+  PHONE_DISPLAY,
+  PHONE_TEL_HREF,
+  SITE_NAME,
+  SITE_URL,
+  whatsappHref,
+} from "@/lib/constants";
 import { COUNTRY_GUIDES, getCountryGuideBySlug } from "@/lib/visa-guide-data";
 
 export function generateStaticParams() {
@@ -19,8 +33,15 @@ export async function generateMetadata({
   const country = getCountryGuideBySlug(slug);
   if (!country) return {};
 
-  const title = `${country.name} Visa Guide — Documents & Process`;
-  const description = `${country.tagline} Eligibility, required documents, and step-by-step process for a ${country.name} visa.`;
+  // Country names run long ("United States of America"), so the title stays
+  // minimal to survive Google's ~60-char cut; the detail lives in the
+  // description instead.
+  const title = `${country.name} Visa Guide`;
+  const description =
+    `${country.tagline} Eligibility, documents and process, explained.`.slice(
+      0,
+      158,
+    );
   const path = `/visa/${country.slug}`;
 
   return {
@@ -32,8 +53,14 @@ export async function generateMetadata({
       url: path,
       title: `${title} | ${SITE_NAME}`,
       description,
+      images: [OG_IMAGE],
     },
-    twitter: { title: `${title} | ${SITE_NAME}`, description },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 
@@ -68,12 +95,54 @@ export default async function CountryVisaGuidePage({
     ],
   };
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${country.name} Visa Assistance`,
+    serviceType: `${country.name} visa consulting and documentation`,
+    description: country.tagline,
+    url: `${SITE_URL}/visa/${country.slug}`,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: { "@type": "State", name: "Tamil Nadu" },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${country.name} visa types`,
+      itemListElement: country.visaTypes.map((visaType) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: visaType.name },
+      })),
+    },
+  };
+
+  // Per-country FAQs, where the guide has them.
+  const faqJsonLd = country.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: country.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      }
+    : null;
+
   return (
     <div className="py-12 md:py-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/visa"
@@ -107,9 +176,17 @@ export default async function CountryVisaGuidePage({
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-tertiary text-tertiary-foreground hover:bg-tertiary/90 text-label-lg flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 shadow-md transition-colors sm:w-auto"
+            className="text-label-lg flex w-full items-center justify-center gap-2 rounded-md bg-emerald-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-500 sm:w-auto"
           >
-            Get Help With This Visa
+            <WhatsAppIcon aria-hidden="true" className="size-5" />
+            Message on WhatsApp
+          </a>
+          <a
+            href={PHONE_TEL_HREF}
+            className="border-outline-variant bg-card text-primary hover:border-tertiary hover:text-tertiary text-label-lg flex w-full items-center justify-center gap-2 rounded-md border px-6 py-3 shadow-sm transition-colors sm:w-auto"
+          >
+            <PhoneCall aria-hidden="true" className="size-5" />
+            Call {PHONE_DISPLAY}
           </a>
         </div>
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { VisaGuideExplorer } from "@/components/visa/VisaGuideExplorer";
-import { SITE_NAME, whatsappHref } from "@/lib/constants";
+import { OG_IMAGE, SITE_NAME, whatsappHref } from "@/lib/constants";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
 export const metadata: Metadata = {
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
     url: "/visa",
     title: `Visa Guide — ${COUNTRY_GUIDES.length} Destinations | ${SITE_NAME}`,
     description: `Eligibility, required documents, and step-by-step process for ${COUNTRY_GUIDES.length}+ visa destinations — tourist, student, and work visas, explained clearly.`,
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 export default function VisaGuidePage() {

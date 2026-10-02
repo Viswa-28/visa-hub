@@ -6,6 +6,7 @@ import {
   APPROVALS_COUNT,
   PHONE_DISPLAY,
   PHONE_TEL_HREF,
+  SITE_TAGLINE,
   WHATSAPP_DEFAULT_HREF,
 } from "@/lib/constants";
 
@@ -41,7 +42,7 @@ export function Hero() {
           </span>
           <span className="text-label-md text-primary flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-4 py-1.5 shadow-sm">
             <ShieldCheck aria-hidden="true" className="text-tertiary size-4" />
-            Your Journey, Our Expertise!
+            {SITE_TAGLINE}
           </span>
           <span className="text-label-md flex items-center gap-2 rounded-full border border-emerald-400/40 bg-white/90 px-3.5 py-1.5 text-emerald-700 shadow-sm">
             <span

@@ -26,7 +26,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <Image
                 src="/logo.jpeg"
-                alt="VisaHub"
+                alt=""
                 width={1024}
                 height={1024}
                 className="size-11 shrink-0 rounded-lg object-cover"

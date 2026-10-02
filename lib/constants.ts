@@ -43,6 +43,19 @@ export const FOOTER_SERVICE_LINKS = [
 /** Every "book a visit" CTA points here — the page that holds the form. */
 export const BOOKING_HREF = "/doorstep#book-doorstep";
 
+/**
+ * Next replaces (not merges) the whole `openGraph` object when a child route
+ * declares one, so any page setting its own OG tags must re-attach the image
+ * explicitly or it ships a preview card with no picture.
+ * Served by app/opengraph-image.tsx.
+ */
+export const OG_IMAGE = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: `${SITE_NAME} — ${SITE_TAGLINE}`,
+} as const;
+
 export const FOOTER_LEGAL_LINKS = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms & Conditions", href: "/terms" },
