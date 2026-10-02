@@ -8,6 +8,7 @@ export const contactFormSchema = z.object({
     .trim()
     .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
   destination: z.string().trim().min(1, "Choose where you're travelling").max(80),
+  dob: z.string().min(1, "Select your date of birth").max(20),
   message: z.string().trim().max(1000).optional(),
   /** Honeypot — bots fill hidden inputs, people can't see them. */
   company: z.string().max(0).optional(),

@@ -42,14 +42,15 @@ export async function POST(request: Request) {
       { label: "Address", value: address },
       { label: "Date of Birth", value: dob },
     ],
+    // Address stays out of the sheet by request — it's still in the
+    // notification email, which is where visit details get read from.
     row: {
       name,
       email: "",
       phone: mobile,
       destination: "",
-      message: "",
-      address,
       dob,
+      message: "",
     },
   });
 

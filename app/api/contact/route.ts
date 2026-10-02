@@ -30,7 +30,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid submission." }, { status: 400 });
   }
 
-  const { name, email, phone, destination, message, company } = parsed.data;
+  const { name, email, phone, destination, dob, message, company } =
+    parsed.data;
 
   // Honeypot tripped. Answer 200 so a bot can't tell it was caught, but log
   // the payload: if a browser ever autofills the hidden field, that's a real
@@ -51,6 +52,7 @@ export async function POST(request: Request) {
       { label: "Email", value: email },
       { label: "Phone", value: phone },
       { label: "Travelling to", value: destination },
+      { label: "Date of Birth", value: dob },
       ...(message ? [{ label: "Message", value: message }] : []),
     ],
     row: {
@@ -58,9 +60,8 @@ export async function POST(request: Request) {
       email,
       phone,
       destination,
+      dob,
       message: message ?? "",
-      address: "",
-      dob: "",
     },
   });
 

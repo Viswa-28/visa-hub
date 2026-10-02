@@ -139,6 +139,17 @@ export function ContactForm({ destinations }: { destinations: string[] }) {
         )}
       </div>
 
+      <Field
+        id="contact-dob"
+        label="Date of Birth"
+        error={errors.dob?.message}
+        inputProps={{
+          type: "date",
+          autoComplete: "bday",
+          ...register("dob"),
+        }}
+      />
+
       <div className="space-y-1.5">
         <Label htmlFor="contact-message">
           Your enquiry <span className="text-neutral">(optional)</span>

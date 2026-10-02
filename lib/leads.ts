@@ -35,6 +35,21 @@ export interface DeliveryResult {
 }
 
 /**
+ * "2026-10-02 13:56:49" in IST. Google Sheets parses this shape as a real
+ * datetime (so it sorts and filters correctly), unlike a raw ISO string with
+ * a Z suffix, which lands as plain text — and in UTC, which is 5h30m off.
+ */
+function istTimestamp() {
+  const now = new Date();
+  const date = now.toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+  const time = now.toLocaleTimeString("en-GB", {
+    timeZone: "Asia/Kolkata",
+    hour12: false,
+  });
+  return `${date} ${time}`;
+}
+
+/**
  * Written before anything is allowed to fail, so a lead is always recoverable
  * from the platform logs even when both delivery channels are down.
  */
@@ -76,10 +91,7 @@ async function sendEmail(lead: Lead) {
 
   const rows = [
     ...lead.fields,
-    {
-      label: "Received",
-      value: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-    },
+    { label: "Received", value: istTimestamp() },
   ];
 
   const text = rows.map((f) => `${f.label}: ${f.value}`).join("\n");
@@ -126,9 +138,10 @@ async function appendToSheet(lead: Lead) {
   const response = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    // `source` deliberately isn't sent to the sheet — it stays in the server
+    // log and the email subject for triage.
     body: JSON.stringify({
-      source: lead.source,
-      submittedAt: new Date().toISOString(),
+      submittedAt: istTimestamp(),
       ...lead.row,
     }),
     signal: AbortSignal.timeout(SEND_TIMEOUT_MS),
