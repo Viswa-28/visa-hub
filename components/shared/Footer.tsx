@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { InstagramIcon } from "@/components/shared/InstagramIcon";
 import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import {
   APPROVALS_COUNT,
   CONSULAR_DISCLAIMER,
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
   FOOTER_LEGAL_LINKS,
   FOOTER_SERVICE_LINKS,
   INSTAGRAM_HANDLE,
@@ -69,6 +71,18 @@ export function Footer() {
                     className="size-4 shrink-0 text-emerald-400"
                   />
                   WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={EMAIL_HREF}
+                  className="hover:text-secondary flex items-center gap-2 transition-colors"
+                >
+                  <Mail
+                    aria-hidden="true"
+                    className="size-4 shrink-0 text-sky-400"
+                  />
+                  {EMAIL_ADDRESS}
                 </a>
               </li>
               <li>

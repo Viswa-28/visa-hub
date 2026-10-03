@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { PHONE_DISPLAY, SITE_NAME, whatsappHref } from "@/lib/constants";
+import {
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
+  PHONE_DISPLAY,
+  SITE_NAME,
+  whatsappHref,
+} from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -68,9 +74,21 @@ export default function PrivacyPolicyPage() {
         </p>
       </Section>
 
-      <Section title="Contact Us">
+      <Section title="Contact &amp; Grievance Officer">
         <p>
-          Questions about this policy can be sent to us at{" "}
+          For questions about this policy, to access or correct your personal
+          data, or to raise a grievance under the Digital Personal Data
+          Protection Act, 2023, write to us at{" "}
+          <a
+            href={EMAIL_HREF}
+            className="text-tertiary hover:text-primary underline underline-offset-2"
+          >
+            {EMAIL_ADDRESS}
+          </a>
+          . We aim to respond within 30 days.
+        </p>
+        <p>
+          You can also reach us at{" "}
           <a
             href={whatsappHref(
               "Hi VisaHub, I have a question about your privacy policy",

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { CONSULAR_DISCLAIMER, SITE_NAME, whatsappHref } from "@/lib/constants";
+import {
+  CONSULAR_DISCLAIMER,
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
+  SITE_NAME,
+  whatsappHref,
+} from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
@@ -76,7 +82,14 @@ export default function TermsPage() {
 
       <Section title="Contact Us">
         <p>
-          For any questions about these terms, reach us on{" "}
+          For any questions about these terms, write to{" "}
+          <a
+            href={EMAIL_HREF}
+            className="text-tertiary hover:text-primary underline underline-offset-2"
+          >
+            {EMAIL_ADDRESS}
+          </a>{" "}
+          or reach us on{" "}
           <a
             href={whatsappHref(
               "Hi VisaHub, I have a question about your terms and conditions",

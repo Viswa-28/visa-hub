@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@/components/shared/Analytics";
 import {
   INSTAGRAM_URL,
+  EMAIL_ADDRESS,
   PHONE_DISPLAY,
   SERVICE_REGIONS,
   SITE_NAME,
@@ -102,6 +103,7 @@ const jsonLd = {
   description,
   slogan: SITE_TAGLINE,
   telephone: PHONE_DISPLAY,
+  email: EMAIL_ADDRESS,
   image: `${SITE_URL}/logo.jpeg`,
   logo: `${SITE_URL}/logo.jpeg`,
   sameAs: [INSTAGRAM_URL],

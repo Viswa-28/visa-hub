@@ -10,6 +10,10 @@ export const PHONE_DISPLAY = "+91 63691 53144";
 export const PHONE_TEL_HREF = "tel:+916369153144";
 export const WHATSAPP_NUMBER = "916369153144";
 
+/** Also the named grievance contact on the legal pages (DPDP Act). */
+export const EMAIL_ADDRESS = "visahubmv@gmail.com";
+export const EMAIL_HREF = `mailto:${EMAIL_ADDRESS}`;
+
 export function whatsappHref(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

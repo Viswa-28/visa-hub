@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Clock, MapPin, PhoneCall } from "lucide-react";
+import { Clock, Mail, MapPin, PhoneCall } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { InstagramIcon } from "@/components/shared/InstagramIcon";
 import { WhatsAppIcon } from "@/components/shared/WhatsAppIcon";
 import {
   CONSULAR_DISCLAIMER,
+  EMAIL_ADDRESS,
+  EMAIL_HREF,
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
   OG_IMAGE,
@@ -110,6 +112,17 @@ export default function ContactPage() {
                       <WhatsAppIcon aria-hidden="true" className="size-4" />
                     </span>
                     Message on WhatsApp
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={EMAIL_HREF}
+                    className="text-foreground/80 hover:text-tertiary flex items-center gap-3 transition-colors"
+                  >
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-sky-600">
+                      <Mail aria-hidden="true" className="size-4" />
+                    </span>
+                    {EMAIL_ADDRESS}
                   </a>
                 </li>
                 <li>
