@@ -176,12 +176,16 @@
 /* Logo wordmark. Both halves carry a vertical gradient that darkens    */
 /* toward the baseline, sampled straight from the "Visa hub" lettering  */
 /* in logo.jpeg (y 732-815) rather than eyeballed. Unlayered so it      */
-/* beats Tailwind's own text-colour utilities. Light surfaces only —    */
-/* these are far too dark to read on the navy footer, which keeps its   */
-/* white/cyan wordmark instead.                                         */
+/* beats Tailwind's own text-colour utilities.                          */
+/*                                                                      */
+/* The -on-dark pair keeps the same indigo->magenta identity but lifts  */
+/* the lightness: the source colours sit at roughly 1.5:1 against the   */
+/* navy footer, i.e. effectively invisible.                             */
 /* ------------------------------------------------------------------ */
 .text-brand-visa,
-.text-brand-hub {
+.text-brand-hub,
+.text-brand-visa-on-dark,
+.text-brand-hub-on-dark {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -191,6 +195,12 @@
 }
 .text-brand-hub {
   background-image: linear-gradient(180deg, #d94598 0%, #963184 100%);
+}
+.text-brand-visa-on-dark {
+  background-image: linear-gradient(180deg, #b49cff 0%, #9b82f5 100%);
+}
+.text-brand-hub-on-dark {
+  background-image: linear-gradient(180deg, #ff86c8 0%, #f45fae 100%);
 }
 
 /* ------------------------------------------------------------------ */

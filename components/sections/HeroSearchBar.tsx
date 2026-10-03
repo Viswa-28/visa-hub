@@ -4,7 +4,61 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { whatsappHref } from "@/lib/constants";
+import { ALL_COUNTRIES } from "@/lib/all-countries";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
+
+const SCHENGEN_CODES = new Set([
+  "AT", "BE", "HR", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS",
+  "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "SK", "SI",
+  "ES", "SE", "CH",
+]);
+
+/**
+ * What people actually type vs what the data calls the country. Without these
+ * "usa" and "uk" return nothing at all — despite being the two examples in the
+ * placeholder — because the list stores "United States" and "United Kingdom".
+ */
+const ALIASES: Record<string, string[]> = {
+  "United States": ["usa", "us", "america", "united states of america"],
+  "United Kingdom": ["uk", "britain", "great britain", "england"],
+  "United Arab Emirates": ["uae", "dubai", "abu dhabi"],
+  Netherlands: ["holland"],
+  "South Korea": ["korea"],
+  "Czech Republic": ["czechia"],
+  Myanmar: ["burma"],
+  "Sri Lanka": ["ceylon"],
+};
+
+/**
+ * Every country gets a destination: the 40 with a guide route there, the rest
+ * open a pre-filled WhatsApp enquiry. Built from name/code data only — the
+ * flag icon library must stay out of this client component, it costs ~57kB.
+ */
+const SEARCHABLE = (() => {
+  const slugByCode: Record<string, string> = {};
+  for (const guide of COUNTRY_GUIDES) {
+    if (guide.code !== "EU") slugByCode[guide.code] = guide.slug;
+  }
+  for (const code of SCHENGEN_CODES) slugByCode[code] = "schengen";
+
+  const countries = ALL_COUNTRIES.map((country) => ({
+    name: country.name,
+    slug: slugByCode[country.code] ?? null,
+    aliases: ALIASES[country.name] ?? [],
+  }));
+
+  // "Schengen" isn't a country, but it's a guide people search for by name.
+  const schengen = COUNTRY_GUIDES.find((g) => g.slug === "schengen");
+  if (schengen) {
+    countries.push({
+      name: schengen.name,
+      slug: schengen.slug,
+      aliases: ["schengen", "europe", "eu"],
+    });
+  }
+
+  return countries;
+})();
 
 export function HeroSearchBar() {
   const router = useRouter();
@@ -14,20 +68,42 @@ export function HeroSearchBar() {
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
-    return COUNTRY_GUIDES.filter((country) =>
-      country.name.toLowerCase().includes(q),
-    ).slice(0, 6);
+    // Ranked in three tiers. An exact alias has to outrank a name prefix,
+    // otherwise "uk" surfaces Ukraine above the United Kingdom.
+    const exactAlias: typeof SEARCHABLE = [];
+    const starts: typeof SEARCHABLE = [];
+    const contains: typeof SEARCHABLE = [];
+
+    for (const country of SEARCHABLE) {
+      const name = country.name.toLowerCase();
+      if (country.aliases.includes(q)) exactAlias.push(country);
+      else if (name.startsWith(q) || country.aliases.some((a) => a.startsWith(q)))
+        starts.push(country);
+      else if (name.includes(q)) contains.push(country);
+    }
+
+    return [...exactAlias, ...starts, ...contains].slice(0, 7);
   }, [query]);
 
-  const goToCountry = (slug: string) => {
+  const openCountry = (country: (typeof SEARCHABLE)[number]) => {
     setIsFocused(false);
-    router.push(`/visa/${slug}`);
+    if (country.slug) {
+      router.push(`/visa/${country.slug}`);
+      return;
+    }
+    window.open(
+      whatsappHref(
+        `Hi VisaHub, I would like to inquire about a visa for ${country.name}`,
+      ),
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (matches.length > 0) {
-      goToCountry(matches[0].slug);
+      openCountry(matches[0]);
       return;
     }
     const trimmed = query.trim();
@@ -54,7 +130,7 @@ export function HeroSearchBar() {
           onChange={(event) => setQuery(event.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setTimeout(() => setIsFocused(false), 150)}
-          placeholder="Search your visa by country — e.g. USA, Canada, UK…"
+          placeholder="Search any of 195 countries — e.g. USA, Canada, UK…"
           autoComplete="off"
           suppressHydrationWarning
           className="text-body-sm text-foreground placeholder:text-neutral min-w-0 flex-1 bg-transparent outline-none"
@@ -70,16 +146,16 @@ export function HeroSearchBar() {
       {isFocused && matches.length > 0 && (
         <ul className="border-outline-variant bg-card absolute inset-x-0 top-full z-20 mt-2 overflow-hidden rounded-xl border shadow-lg">
           {matches.map((country) => (
-            <li key={country.slug}>
+            <li key={country.name}>
               <button
                 type="button"
                 onMouseDown={(event) => event.preventDefault()}
-                onClick={() => goToCountry(country.slug)}
-                className="hover:bg-surface-container-low text-label-md text-foreground flex w-full items-center justify-between px-4 py-2.5 text-left transition-colors"
+                onClick={() => openCountry(country)}
+                className="hover:bg-surface-container-low text-label-md text-foreground flex w-full items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors"
               >
-                {country.name}
-                <span className="text-neutral text-body-sm">
-                  View guide &rarr;
+                <span className="min-w-0 truncate">{country.name}</span>
+                <span className="text-neutral text-body-sm shrink-0">
+                  {country.slug ? "View guide →" : "Ask on WhatsApp →"}
                 </span>
               </button>
             </li>

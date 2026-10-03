@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AllCountriesAccordion } from "@/components/visa/AllCountriesAccordion";
 import { VisaGuideExplorer } from "@/components/visa/VisaGuideExplorer";
 import { OG_IMAGE, SITE_NAME, whatsappHref } from "@/lib/constants";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
@@ -36,6 +37,10 @@ export default function VisaGuidePage() {
         </div>
 
         <VisaGuideExplorer countries={COUNTRY_GUIDES} />
+
+        <div className="border-outline-variant/60 mt-14 border-t pt-14">
+          <AllCountriesAccordion />
+        </div>
 
         <p className="text-neutral mx-auto mt-12 max-w-2xl text-center text-[11px]">
           Visa rules change often. This guide is general information to help

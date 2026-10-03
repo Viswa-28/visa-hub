@@ -1,6 +1,7 @@
 import Link from "next/link";
 import * as Flags from "country-flag-icons/react/3x2";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageSquarePlus } from "lucide-react";
+import { whatsappHref } from "@/lib/constants";
 import { COUNTRY_GUIDES } from "@/lib/visa-guide-data";
 
 const FEATURED_SLUGS = [
@@ -12,6 +13,14 @@ const FEATURED_SLUGS = [
   "uae",
   "singapore",
   "thailand",
+  "japan",
+  "malaysia",
+  "new-zealand",
+  "ireland",
+  "vietnam",
+  "sri-lanka",
+  "turkey",
+  "saudi-arabia",
 ] as const;
 
 const FEATURED_DESTINATIONS = FEATURED_SLUGS.map(
@@ -20,9 +29,9 @@ const FEATURED_DESTINATIONS = FEATURED_SLUGS.map(
 
 export function Categories() {
   return (
-    <section className="bg-card py-16" id="destinations">
+    <section className="bg-card py-14 md:py-16" id="destinations">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-12 max-w-3xl text-center">
+        <div className="mx-auto mb-8 max-w-3xl text-center">
           <span className="border-tertiary/20 bg-tertiary/10 text-label-caps text-tertiary rounded-full border px-3.5 py-1.5 uppercase">
             Visa Consulting
           </span>
@@ -31,42 +40,53 @@ export function Categories() {
           </h2>
           <p className="text-body-md text-on-surface-variant mt-2">
             Eligibility, documents, and process for {COUNTRY_GUIDES.length}+
-            destinations — start with a popular one below.
+            destinations &mdash; or search any of the 195 countries above.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {FEATURED_DESTINATIONS.map((country) => {
             const Flag = Flags[country.code as keyof typeof Flags];
             return (
               <Link
                 key={country.slug}
                 href={`/visa/${country.slug}`}
-                className="border-outline-variant bg-card hover:ring-secondary/40 flex flex-col overflow-hidden rounded-lg border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-2"
+                className="border-outline-variant bg-surface-container-low hover:border-tertiary hover:ring-secondary/40 flex items-center gap-3 rounded-xl border p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:ring-2 sm:p-4"
               >
-                <div className="border-outline-variant/60 bg-surface-container-low flex items-center gap-3 border-b p-5">
-                  {Flag && (
-                    <Flag
-                      aria-hidden="true"
-                      className="h-6 w-9 shrink-0 rounded-[2px] object-cover shadow-sm"
-                    />
-                  )}
-                  <h3 className="text-label-lg text-primary">
-                    {country.name}
-                  </h3>
-                </div>
-                <div className="flex flex-1 flex-col justify-between gap-4 p-5">
-                  <p className="text-body-sm text-on-surface-variant">
-                    {country.tagline}
-                  </p>
-                  <span className="text-tertiary text-label-md flex items-center gap-1">
-                    View visa guide
-                    <ArrowRight aria-hidden="true" className="size-3.5" />
-                  </span>
-                </div>
+                {Flag && (
+                  <Flag
+                    aria-hidden="true"
+                    className="ring-outline-variant/40 h-6 w-9 shrink-0 rounded-[3px] object-cover ring-1"
+                  />
+                )}
+                <span className="text-label-lg text-primary min-w-0 flex-1 truncate">
+                  {country.name}
+                </span>
+                <ArrowRight
+                  aria-hidden="true"
+                  className="text-tertiary size-4 shrink-0"
+                />
               </Link>
             );
           })}
+
+          {/* Catch-all for the 155 destinations without a dedicated guide. */}
+          <a
+            href={whatsappHref(
+              "Hi VisaHub, I would like to inquire about a visa for a country not listed on your site",
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="col-span-2 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-3.5 transition-colors hover:bg-emerald-100 sm:col-span-1 sm:p-4"
+          >
+            <MessageSquarePlus
+              aria-hidden="true"
+              className="size-6 shrink-0 text-emerald-600"
+            />
+            <span className="text-label-md min-w-0 flex-1 text-emerald-800">
+              Don&rsquo;t see your country? Message us on WhatsApp
+            </span>
+          </a>
         </div>
 
         <div className="mt-8 text-center">
@@ -74,7 +94,7 @@ export function Categories() {
             href="/visa"
             className="bg-primary text-primary-foreground hover:bg-tertiary text-label-lg inline-flex items-center gap-2 rounded-md px-6 py-3 shadow-md transition-colors"
           >
-            Explore All {COUNTRY_GUIDES.length}+ Destinations
+            View all destinations
             <ArrowRight aria-hidden="true" className="size-4" />
           </Link>
         </div>

@@ -146,7 +146,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${anton.variable} ${outfit.variable} h-full scroll-smooth`}
     >
       <body
-        className="flex min-h-full flex-col antialiased"
+        className="flex min-h-full flex-col pb-20 antialiased lg:pb-0"
         suppressHydrationWarning
       >
         <a

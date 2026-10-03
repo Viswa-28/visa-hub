@@ -43,18 +43,6 @@ const FAQS: FaqItem[] = [
       "The most common categories for applicants from India are B1/B2 (Business/Tourist), F-1 (Student), H-1B (Work), and J-1 (Exchange Visitor) — each with its own eligibility rules and document checklist, covered in full in our Visa Guide. Not sure which applies to you? Our doorstep counselor reviews your situation in person and confirms the right category before you start any paperwork.",
   },
   {
-    id: "dummy-tickets",
-    question: "Are your dummy tickets valid and verifiable with airlines?",
-    answer:
-      "Yes! We generate genuine flight reservation dummy tickets that come with an authentic airline PNR number. Consulates and visa officers can verify the booking on the official airline website.",
-  },
-  {
-    id: "non-usa-visas",
-    question: "Do you assist with visas beyond the USA?",
-    answer:
-      "Yes. Our Visa Guide covers 40+ destinations — Canada, United Kingdom, Schengen (all 27 European countries), Australia, New Zealand, UAE, Singapore, Japan, and many more — with end-to-end documentation, applications, and slot bookings.",
-  },
-  {
     id: "guide-accuracy",
     question: "How accurate is the information in your Visa Guide?",
     answer:

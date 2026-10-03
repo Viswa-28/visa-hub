@@ -37,11 +37,11 @@ const TESTIMONIALS: Testimonial[] = [
 export function SocialProof() {
   return (
     <section
-      className="border-outline-variant/60 bg-card border-t py-20"
+      className="border-outline-variant/60 bg-card border-t py-14 md:py-16"
       id="testimonials"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
+        <div className="mx-auto mb-8 max-w-2xl text-center">
           <span className="text-label-caps rounded-full border border-emerald-500/20 bg-emerald-50 px-3.5 py-1.5 text-emerald-700 uppercase">
             Verified Success Stories
           </span>
@@ -55,7 +55,9 @@ export function SocialProof() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {/* Horizontal snap-scroll below md so three testimonials cost one
+            screen instead of three; plain grid from md up. */}
+        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&>*]:w-[86%] [&>*]:shrink-0 [&>*]:snap-start md:mx-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:[&>*]:w-auto [&::-webkit-scrollbar]:hidden">
           {TESTIMONIALS.map((testimonial) => (
             <div
               key={testimonial.id}
@@ -95,20 +97,20 @@ export function SocialProof() {
           ))}
         </div>
 
-        <div className="border-tertiary/20 bg-primary mt-10 flex flex-col items-center justify-between gap-6 rounded-xl border p-6 text-white sm:flex-row">
+        <div className="border-tertiary/20 bg-primary mt-8 flex flex-col items-center justify-between gap-5 rounded-xl border p-5 text-white sm:flex-row sm:p-6">
           <div className="flex items-center gap-4">
             <span
               aria-hidden="true"
-              className="to-tertiary flex size-14 shrink-0 items-center justify-center rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 shadow-lg"
+              className="to-tertiary flex size-12 shrink-0 items-center justify-center rounded-lg bg-gradient-to-tr from-amber-500 via-rose-500 shadow-lg sm:size-14"
             >
-              <InstagramIcon className="size-7 text-white" />
+              <InstagramIcon className="size-6 text-white sm:size-7" />
             </span>
             <div>
               <p className="text-label-lg text-white">
-                Follow {INSTAGRAM_HANDLE} on Instagram
+                See more on Instagram
               </p>
               <p className="text-body-sm text-white/60">
-                Daily visa slot alerts, approved passport stories, and live
+                {INSTAGRAM_HANDLE} &mdash; approved passport stories and live
                 consular updates.
               </p>
             </div>

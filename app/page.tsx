@@ -1,10 +1,10 @@
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
+import { MobileCtaBar } from "@/components/shared/MobileCtaBar";
 import { WhatsAppFab } from "@/components/shared/WhatsAppFab";
 import { CallBanner } from "@/components/sections/CallBanner";
 import { Categories } from "@/components/sections/Categories";
-import { CountriesServed } from "@/components/sections/CountriesServed";
-import { Doorstep } from "@/components/sections/Doorstep";
+import { DoorstepSteps } from "@/components/sections/DoorstepSteps";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
@@ -16,16 +16,16 @@ export default function Home() {
       <Header />
       <main id="main-content">
         <Hero />
+        <DoorstepSteps />
         <Categories />
-        <Doorstep />
-        <CountriesServed />
-        <CallBanner />
-        <Services />
         <SocialProof />
+        <Services />
         <Faq />
+        <CallBanner />
       </main>
       <Footer />
       <WhatsAppFab />
+      <MobileCtaBar />
     </>
   );
 }

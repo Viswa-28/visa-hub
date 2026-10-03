@@ -23,7 +23,7 @@ export function WhatsAppFab() {
           : { delay: 0.6, duration: 0.3, ease: "easeOut" }
       }
       whileHover={prefersReducedMotion ? undefined : { y: -4 }}
-      className="fixed right-4 z-40 flex size-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-xl shadow-emerald-900/30 transition-colors hover:bg-emerald-500 sm:right-6"
+      className="fixed right-4 z-40 hidden size-14 lg:flex items-center justify-center rounded-full bg-emerald-600 text-white shadow-xl shadow-emerald-900/30 transition-colors hover:bg-emerald-500 sm:right-6"
       style={{
         bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
       }}

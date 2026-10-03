@@ -33,8 +33,8 @@ export function Footer() {
                 height={1024}
                 className="size-11 shrink-0 rounded-lg object-cover"
               />
-              <span className="font-brand text-[26px] leading-tight font-bold tracking-tight text-white">
-                Visa<span className="text-secondary">Hub</span>
+              <span className="font-brand text-brand-visa-on-dark text-[26px] leading-tight font-bold tracking-tight">
+                Visa<span className="text-brand-hub-on-dark">Hub</span>
               </span>
             </div>
             <p className="text-body-sm max-w-sm text-white/70">
