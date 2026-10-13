@@ -29,8 +29,8 @@ export function Footer() {
               <Image
                 src="/logo.jpeg"
                 alt=""
-                width={1024}
-                height={1024}
+                width={44}
+                height={44}
                 className="size-11 shrink-0 rounded-lg object-cover"
               />
               <span className="font-brand text-brand-visa-on-dark text-[26px] leading-tight font-bold tracking-tight">

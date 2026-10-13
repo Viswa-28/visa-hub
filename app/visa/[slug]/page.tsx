@@ -176,7 +176,7 @@ export default async function CountryVisaGuidePage({
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-label-lg flex w-full items-center justify-center gap-2 rounded-md bg-emerald-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-500 sm:w-auto"
+            className="text-label-lg flex w-full items-center justify-center gap-2 rounded-md bg-emerald-700 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-800 sm:w-auto"
           >
             <WhatsAppIcon aria-hidden="true" className="size-5" />
             Message on WhatsApp

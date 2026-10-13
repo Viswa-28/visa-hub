@@ -59,7 +59,7 @@ export function Services() {
     <section className="border-outline-variant/60 bg-surface-container-low border-y py-12" id="all-services">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-8 max-w-2xl text-center">
-          <span className="text-label-caps text-neutral uppercase">
+          <span className="text-label-caps text-on-surface-variant uppercase">
             Also Available
           </span>
           <h2 className="text-headline-sm text-primary mt-1">

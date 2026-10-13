@@ -77,7 +77,7 @@ export function Hero() {
             href={WHATSAPP_DEFAULT_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-md bg-emerald-600 px-7 py-3.5 text-label-lg text-white shadow-lg shadow-emerald-900/20 transition-colors hover:bg-emerald-500 sm:w-auto"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-emerald-700 px-7 py-3.5 text-label-lg text-white shadow-lg shadow-emerald-900/20 transition-colors hover:bg-emerald-800 sm:w-auto"
           >
             <WhatsAppIcon aria-hidden="true" className="size-5" />
             Chat on WhatsApp

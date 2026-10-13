@@ -32,7 +32,7 @@ export function Categories() {
     <section className="bg-card py-14 md:py-16" id="destinations">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-8 max-w-3xl text-center">
-          <span className="border-tertiary/20 bg-tertiary/10 text-label-caps text-tertiary rounded-full border px-3.5 py-1.5 uppercase">
+          <span className="border-tertiary/20 bg-tertiary/5 text-label-caps text-tertiary rounded-full border px-3.5 py-1.5 uppercase">
             Visa Consulting
           </span>
           <h2 className="text-headline-lg-mobile text-primary md:text-headline-lg mt-3">

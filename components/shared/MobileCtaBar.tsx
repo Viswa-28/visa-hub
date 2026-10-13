@@ -18,7 +18,7 @@ export function MobileCtaBar() {
           href={WHATSAPP_DEFAULT_HREF}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-label-lg flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-emerald-600 text-white transition-colors hover:bg-emerald-500"
+          className="text-label-lg flex min-h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-emerald-700 text-white transition-colors hover:bg-emerald-800"
         >
           <WhatsAppIcon aria-hidden="true" className="size-5" />
           WhatsApp

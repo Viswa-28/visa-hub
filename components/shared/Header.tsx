@@ -44,9 +44,9 @@ export function Header() {
           <Image
             src="/logo.jpeg"
             alt=""
-            width={1024}
-            height={1024}
-            priority
+            width={56}
+            height={56}
+            loading="eager"
             className="size-12 shrink-0 rounded-lg object-cover sm:size-14"
           />
           <span className="min-w-0">

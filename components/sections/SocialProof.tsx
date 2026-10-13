@@ -65,6 +65,7 @@ export function SocialProof() {
             >
               <div className="space-y-3">
                 <div
+                  role="img"
                   aria-label="5 out of 5 stars"
                   className="flex items-center gap-0.5 text-amber-400"
                 >
@@ -88,7 +89,7 @@ export function SocialProof() {
                   <p className="text-label-lg text-primary">
                     {testimonial.name}
                   </p>
-                  <p className="text-neutral text-[10px]">
+                  <p className="text-label-md text-on-surface-variant font-normal">
                     {testimonial.location}
                   </p>
                 </div>

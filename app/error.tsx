@@ -47,7 +47,7 @@ export default function Error({
             href={WHATSAPP_DEFAULT_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-label-lg flex items-center gap-2 rounded-md bg-emerald-600 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-500"
+            className="text-label-lg flex items-center gap-2 rounded-md bg-emerald-700 px-6 py-3 text-white shadow-md transition-colors hover:bg-emerald-800"
           >
             <WhatsAppIcon aria-hidden="true" className="size-5" />
             WhatsApp Us
